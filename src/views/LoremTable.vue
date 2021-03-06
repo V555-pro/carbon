@@ -1,6 +1,5 @@
 <template>
   <div class="lorem-table-page">
-    <Header />
     <template v-if="isLoading">
       <div class="lorem-page-loader">
         <cv-inline-loading
@@ -46,7 +45,7 @@
           :helper-text="dataTable.helperText"
           :data="filteredData" @overflow-menu-click="onOverflowMenuClick"  ref="table">
           <template v-if="dataTable.use_batchActions" slot="batch-actions">
-            <cv-button @click="onBatchAction1">
+            <cv-button @click="onDeleteRow">
               Delete
               <TrashCan16 class="bx--btn__icon"/>
             </cv-button>
@@ -67,12 +66,10 @@
 <script>
 // @ is an alias to /src
 
-import Header from '../components/layout/AddressHeader'
 import sampleData from '../assets/sampleData'
 
 export default {
   name: 'LoremTable',
-  components: { Header },
   data () {
     return {
       isLoading: true,
@@ -151,7 +148,18 @@ export default {
   methods: {
     onSort () {
     },
-    onBatchAction1 () {
+    onDeleteRow (e) {
+      if (this.rowSelects.length > 0) {
+        const that = this
+        var filtered = this.dataTable.data.filter((item, index) => {
+          return that.rowSelects.indexOf(index.toString()) < 0
+        })
+        this.dataTable.data = filtered
+        this.rowSelects = []
+      }
+      if (this.dataTable.data.length < 1) {
+        this.errorInfo.visible = true
+      }
     },
     onBatchAction2 () {
     },
@@ -195,13 +203,26 @@ export default {
       .bx--batch-actions--active{
         /*display: block;*/
       }
-      .bx--data-table-header{
-        background: rgb(38 38 38);
-        h4{
-          color: rgb(244 244 244);
+      .bx--data-table-container{
+        width: auto;
+        overflow: auto;
+        display: flex;
+        flex-flow: column;
+        flex-wrap: wrap;
+
+        .bx--data-table-header{
+          background: rgb(38 38 38);
+          /*width: 100%;*/
+          /*flex: 1;*/
+          h4{
+            color: rgb(244 244 244);
+          }
+          p{
+            color: rgb(197 197 197);
+          }
         }
-        p{
-          color: rgb(197 197 197);
+        .bx--table-toolbar{
+          width: auto;
         }
       }
       .bx--table-toolbar{

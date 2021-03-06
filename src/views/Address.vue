@@ -1,6 +1,5 @@
 <template>
   <div class="address-page">
-    <Header />
     <div class="address-page-inner">
       <div class="cvInputWrap">
         <div class="cvInputBox">
@@ -37,12 +36,10 @@
 <script>
 // @ is an alias to /src
 
-import Header from '../components/layout/AddressHeader'
 import lists from '../assets/list'
 
 export default {
   name: 'Address',
-  components: { Header },
   data () {
     return {
       cvInputLabel: 'Enter Address',

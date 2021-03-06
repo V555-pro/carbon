@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <Header />
     <div class="home-inner">
       <h2 class="page-header">
         Lorem ipsum dolor sit amet, consectetur
@@ -60,15 +59,11 @@
         </div>
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
-import Header from '../components/layout/Header'
-import Footer from '../components/layout/Footer'
 
 import AddSvg from '../assets/svg/add.svg'
 import ArrowRight from '../assets/svg/arrow-right.svg'
@@ -78,7 +73,6 @@ import Launch from '../assets/svg/launch.svg'
 
 export default {
   name: 'Home',
-  components: { Header, Footer },
   data () {
     return {
       addSvg: AddSvg,
@@ -95,15 +89,16 @@ export default {
   .home{
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
     overflow: auto;
     background: #262626;
     .home-inner{
       width: 70%;
-      min-height: 65%;
-      margin-bottom: 170px;
+      height: auto;
+      margin: 0 auto;
+      margin-bottom: 98px;
       .page-header{
         color: white;
         text-align: initial;
@@ -111,6 +106,7 @@ export default {
         font-size: 25px;
         word-break: break-word;
         margin-bottom: 30px;
+        margin-top: 30px;
       }
       .tile-wrapper{
         display: flex;

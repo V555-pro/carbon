@@ -14,5 +14,13 @@
     "Round Robin",
     "Maureen’s VM Groups",
     "Active"
+  ],
+  [
+    "Load Balancer 6",
+    "HTTP",
+    "89",
+    "Round Robin",
+    "Maureen’s VM Groups",
+    "Active"
   ]
 ]

@@ -1,6 +1,6 @@
 <template>
   <div class="lorem-page">
-    <Header />
+<!--    <Header />-->
     <div class="lorem-page-inner">
       <router-link :to="{name: 'LoremTable'}" class="loremTableLink">
           Grayed Out Button
@@ -13,11 +13,8 @@
 <script>
 // @ is an alias to /src
 
-import Header from '../components/layout/AddressHeader'
-
 export default {
   name: 'Lorem1',
-  components: { Header },
   data () {
     return {
       icon: {

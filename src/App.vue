@@ -1,12 +1,23 @@
 <template>
   <div id="app">
+    <Header />
     <router-view/>
+    <Footer v-if="currentRouteName === 'Home'" />
   </div>
 </template>
 
 <script>
+import Header from './components/layout/Header'
+import Footer from './components/layout/Footer'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: { Header, Footer },
+  computed: {
+    currentRouteName () {
+      return this.$route.name
+    }
+  }
 }
 </script>
 
