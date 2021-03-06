@@ -89,7 +89,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 h3 {
   margin: 40px 0 0;
 }
@@ -107,5 +107,16 @@ a {
 .bx--header {
   background-color: #171717;
   border-bottom: none;
+}
+.bx--header__action{
+  &:focus{
+    border-color: transparent !important;
+  }
+}
+.cv-header-name, .cv-header-nav, .bx--header__menu-bar, .cv-header-menu-item, a.bx--header__menu-item{
+  &:focus {
+    border-color: transparent !important;
+    outline: none;
+  }
 }
 </style>
