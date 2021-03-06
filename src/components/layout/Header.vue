@@ -5,14 +5,14 @@
       Skip to content
     </cv-skip-to-content>
     <cv-header-name href="javascript:void(0)" @click.prevent="goHome()" prefix="">
-      {{cvHeaderName}}
+      Lorem Ipsum
     </cv-header-name>
     <cv-header-nav aria-label="Carbon nav">
       <cv-header-menu-item href="javascript:void(0)">
-        {{cvHeaderlink1}}
+        Lorem Ipsum Delore
       </cv-header-menu-item>
       <cv-header-menu-item href="javascript:void(0)">
-        {{cvHeaderlink2}}
+        Lorem Ipsum
       </cv-header-menu-item>
     </cv-header-nav>
     <template v-slot:left-panels v-if="true">
@@ -20,10 +20,10 @@
         <cv-side-nav-items>
           <cv-header-side-nav-items>
             <cv-header-menu-item href="javascript:void(0)">
-              {{cvHeaderlink1}}
+              Lorem Ipsum Delore
             </cv-header-menu-item>
             <cv-header-menu-item href="javascript:void(0)">
-              {{cvHeaderlink2}}
+              Lorem Ipsum
             </cv-header-menu-item>
           </cv-header-side-nav-items>
         </cv-side-nav-items>
@@ -66,27 +66,6 @@ export default {
   computed: {
     currentRouteName () {
       return this.$route.name
-    },
-    cvHeaderName () {
-      let headerName = 'Lorem Ipsum'
-      if (this.currentRouteName !== 'Home') {
-        headerName = 'Visor Finance'
-      }
-      return headerName
-    },
-    cvHeaderlink1 () {
-      let linkName = 'Lorem Ipsum Delore'
-      if (this.currentRouteName !== 'Home') {
-        linkName = 'Address Whitelist'
-      }
-      return linkName
-    },
-    cvHeaderlink2 () {
-      let linkName = 'Lorem Ipsum'
-      if (this.currentRouteName !== 'Home') {
-        linkName = 'Mint Visor NFT'
-      }
-      return linkName
     }
   },
   methods: {
