@@ -7,7 +7,7 @@
       </h2>
       <div class="tile-wrapper">
         <div class="large_tile_group">
-          <router-link :to="{name: 'Lorem1'}" class="c_tile large_tile">
+          <div class="c_tile large_tile" :class="{'active': page === 1}" @click="goTo('Lorem1')">
             <div class="tileHeader">Lorem Ipsum 1</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -15,10 +15,10 @@
             <div class="tileFooter">
               <img :src="addSvg" />
             </div>
-          </router-link>
+          </div>
         </div>
         <div class="middle_tile_group">
-          <router-link :to="{name:'Address'}" class="c_tile middle_tile">
+          <div class="c_tile middle_tile" :class="{'active': page === 2}" @click="goTo('Address')">
             <div class="tileHeader">Lorem Ipsum 2</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -26,8 +26,8 @@
             <div class="tileFooter">
               <img :src="checkMark" />
             </div>
-          </router-link>
-          <div class="c_tile middle_tile">
+          </div>
+          <div class="c_tile middle_tile" :class="{'active': page === 3}" @click="goTo('3')">
             <div class="tileHeader">Lorem Ipsum 3</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="small_tile_group">
-          <div class="c_tile small_tile">
+          <div class="c_tile small_tile" :class="{'active': page === 4}" @click="goTo('4')">
             <div class="tileHeader">Lorem Ipsum 4</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -47,7 +47,7 @@
               <img :src="launch" />
             </div>
           </div>
-          <div class="c_tile small_tile">
+          <div class="c_tile small_tile" :class="{'active': page === 5}" @click="goTo('5')">
             <div class="tileHeader">Lorem Ipsum 5</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -79,7 +79,29 @@ export default {
       arrowRight: ArrowRight,
       checkMark: CheckMark,
       information: Information,
-      launch: Launch
+      launch: Launch,
+      page: 0
+    }
+  },
+  methods: {
+    goTo (page) {
+      if (page === 'Lorem1') {
+        this.page = 1
+        setTimeout(() => {
+          this.$router.push({ name: 'Lorem1' })
+        }, 300)
+      } else if (page === 'Address') {
+        this.page = 2
+        setTimeout(() => {
+          this.$router.push({ name: 'Address' })
+        }, 300)
+      } else if (page === '3') {
+        this.page = 3
+      } else if (page === '4') {
+        this.page = 4
+      } else if (page === '5') {
+        this.page = 5
+      }
     }
   }
 }
@@ -131,6 +153,14 @@ export default {
           text-decoration: none;
           display: flex;
           flex-flow: column;
+          cursor: pointer;
+          &:hover{
+            color: #f4f4f4;
+            background-color: #2c2c2c;
+          }
+          &.active {
+            outline: -webkit-focus-ring-color auto 1px;
+          }
           &.large_tile{
             height: calc(100% + 4px);
             width: 100%;

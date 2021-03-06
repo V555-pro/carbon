@@ -2,10 +2,10 @@
   <div class="lorem-page">
 <!--    <Header />-->
     <div class="lorem-page-inner">
-      <router-link :to="{name: 'LoremTable'}" class="loremTableLink">
+      <div class="loremTableLink" :class="{'active': clicked}" @click="actionClick()">
           Grayed Out Button
         <b-icon-plus/>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -23,12 +23,16 @@ export default {
         },
         functional: true,
         _Ctor: {}
-      }
+      },
+      clicked: false
     }
   },
   methods: {
     actionClick () {
-
+      this.clicked = true
+      setTimeout(() => {
+        this.$router.push({ name: 'LoremTable' })
+      }, 500)
     }
   }
 }
@@ -51,6 +55,11 @@ export default {
         display: flex;
         align-items: center;
         font-size: 17px;
+        cursor: pointer;
+        &.active{
+          background-color: #D3FB67;
+          color: #161616;
+        }
         svg{
           margin-left: 31px;
           font-size: 21px;

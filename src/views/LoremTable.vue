@@ -129,7 +129,7 @@ export default {
         that.errorInfo.visible = false
         that.successInfo.visible = false
       }, 1500)
-    }, 5000)
+    }, 6500)
   },
   computed: {
     filteredData () {
@@ -188,6 +188,12 @@ export default {
       justify-content: center;
       .bx--inline-loading {
         justify-content: center;
+        .bx--loading__svg {
+          stroke: #D3FB67;
+          .bx--loading__stroke {
+            stroke: unset;
+          }
+        }
       }
     }
     .lorem-table-page-inner{
@@ -197,11 +203,9 @@ export default {
         width: 80% !important;
         margin: 150px auto;
       }
-      .bx--batch-actions{
-        /*display: none;*/
-      }
-      .bx--batch-actions--active{
-        /*display: block;*/
+      .bx--batch-actions, .bx--batch-actions--active, .bx--action-list button, .bx--batch-summary__para span{
+        background-color: #D3FB67;
+        color: #161616;
       }
       .bx--data-table-container{
         width: auto;
