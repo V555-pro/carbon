@@ -129,7 +129,7 @@ export default {
         that.errorInfo.visible = false
         that.successInfo.visible = false
       }, 1500)
-    }, 6500)
+    }, 3000)
   },
   computed: {
     filteredData () {

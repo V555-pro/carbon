@@ -8,6 +8,7 @@
       <div class="tile-wrapper">
         <div class="large_tile_group">
           <div class="c_tile large_tile" :class="{'active': page === 1}" @click="goTo('Lorem1')">
+            <CheckmarkFilled16 class="checkmark" />
             <div class="tileHeader">Lorem Ipsum 1</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -19,6 +20,7 @@
         </div>
         <div class="middle_tile_group">
           <div class="c_tile middle_tile" :class="{'active': page === 2}" @click="goTo('Address')">
+            <CheckmarkFilled16 class="checkmark" />
             <div class="tileHeader">Lorem Ipsum 2</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -28,6 +30,7 @@
             </div>
           </div>
           <div class="c_tile middle_tile" :class="{'active': page === 3}" @click="goTo('3')">
+            <CheckmarkFilled16 class="checkmark" />
             <div class="tileHeader">Lorem Ipsum 3</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -39,6 +42,7 @@
         </div>
         <div class="small_tile_group">
           <div class="c_tile small_tile" :class="{'active': page === 4}" @click="goTo('4')">
+            <CheckmarkFilled16 class="checkmark" />
             <div class="tileHeader">Lorem Ipsum 4</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -48,6 +52,7 @@
             </div>
           </div>
           <div class="c_tile small_tile" :class="{'active': page === 5}" @click="goTo('5')">
+            <CheckmarkFilled16 class="checkmark" />
             <div class="tileHeader">Lorem Ipsum 5</div>
             <div class="tileBody">
               Lorem Ipsum
@@ -70,6 +75,7 @@ import ArrowRight from '../assets/svg/arrow-right.svg'
 import CheckMark from '../assets/svg/checkmark.svg'
 import Information from '../assets/svg/information.svg'
 import Launch from '../assets/svg/launch.svg'
+import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16'
 
 export default {
   name: 'Home',
@@ -82,6 +88,9 @@ export default {
       launch: Launch,
       page: 0
     }
+  },
+  components: {
+    CheckmarkFilled16
   },
   methods: {
     goTo (page) {
@@ -145,6 +154,7 @@ export default {
           width: 20%;
         }
         .c_tile{
+          position: relative;
           padding: 20px;
           background: black;
           width: 100%;
@@ -160,11 +170,20 @@ export default {
           }
           &.active {
             outline: -webkit-focus-ring-color auto 1px;
+            color: white;
+            .checkmark {
+              display: block;
+            }
           }
           &.large_tile{
             height: calc(100% + 4px);
             width: 100%;
             margin-bottom: 0;
+          }
+          .checkmark {
+            position: absolute;
+            right: 15px;
+            display: none;
           }
           .tileHeader{
             color: white;
