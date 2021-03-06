@@ -1,6 +1,9 @@
 <template>
   <cv-header aria-label="Carbon header">
     <cv-header-menu-button aria-label="Header menu" aria-controls="side-nav" />
+    <cv-skip-to-content href="#main-content">
+      Skip to content
+    </cv-skip-to-content>
     <cv-header-name href="javascript:void(0)" @click.prevent="goHome()" prefix="">
       {{cvHeaderName}}
     </cv-header-name>
@@ -12,6 +15,20 @@
         {{cvHeaderlink2}}
       </cv-header-menu-item>
     </cv-header-nav>
+    <template v-slot:left-panels v-if="true">
+      <cv-side-nav id="side-nav" fixed>
+        <cv-side-nav-items>
+          <cv-header-side-nav-items>
+            <cv-header-menu-item href="javascript:void(0)">
+              {{cvHeaderlink1}}
+            </cv-header-menu-item>
+            <cv-header-menu-item href="javascript:void(0)">
+              {{cvHeaderlink2}}
+            </cv-header-menu-item>
+          </cv-header-side-nav-items>
+        </cv-side-nav-items>
+      </cv-side-nav>
+    </template>
     <template v-slot:header-global>
       <template v-if="currentRouteName !== 'home'">
         <cv-header-global-action aria-label="Notification" @click="actionNotification" aria-controls="user-panel">
