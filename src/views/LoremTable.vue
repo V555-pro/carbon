@@ -11,24 +11,25 @@
       </div>
     </template>
     <template v-else>
-      <cv-toast-notification v-if="errorInfo.visible"
-         kind="error"
-         :title="'Error Notification'"
-         :sub-title="'Roius abnta mod tempor adsfiso incidfid idunt'"
-         :caption="errorInfo.timestamp"
-         @close="doCloseNotification"
-         :close-aria-label="errorInfo.closeAriaLabel"
-         :low-contrast="false"></cv-toast-notification>
-      <cv-toast-notification v-if="successInfo.visible"
-         kind="success"
-         :title="'Success Notification'"
-         :sub-title="'Roius abnta mod tempor adsfiso incidfid idunt'"
-         :caption="successInfo.timestamp"
-         @close="doCloseNotification"
-         :close-aria-label="successInfo.closeAriaLabel"
-         :low-contrast="false"></cv-toast-notification>
       <div class="lorem-table-page-inner">
+        <cv-toast-notification v-if="errorInfo.visible"
+          kind="success"
+          class="error"
+          :title="'Error Notification'"
+          :sub-title="'Roius abnta mod tempor'"
+          @close="doCloseNotification"
+          :close-aria-label="errorInfo.closeAriaLabel"
+          :low-contrast="false"></cv-toast-notification>
+        <cv-toast-notification v-if="successInfo.visible"
+          kind="success"
+          class="success"
+          :title="'Success Notification'"
+          :sub-title="'Roius abnta mod tempor'"
+          @close="doCloseNotification"
+          :close-aria-label="successInfo.closeAriaLabel"
+          :low-contrast="false"></cv-toast-notification>
         <cv-data-table
+          v-if="this.dataTable.data.length > 0"
           :row-size="dataTable.rowSize"
           :auto-width="dataTable.autoWidth"
           :sortable="dataTable.sortable"
@@ -44,6 +45,25 @@
           :overflow-menu="dataTable.overflowMenu"
           :helper-text="dataTable.helperText"
           :data="filteredData" @overflow-menu-click="onOverflowMenuClick"  ref="table">
+          <template slot="data">
+            <cv-data-table-row v-for="(row, rowIndex) in filteredData" :key="`${rowIndex}`" :value="`${rowIndex}`">
+              <cv-data-table-cell>{{ row[0] }}</cv-data-table-cell>
+              <cv-data-table-cell>{{ row[1] }}</cv-data-table-cell>
+              <cv-data-table-cell>{{ row[2] }}</cv-data-table-cell>
+              <cv-data-table-cell>{{ row[3] }}</cv-data-table-cell>
+              <cv-data-table-cell>{{ row[4] }}</cv-data-table-cell>
+              <cv-data-table-cell>
+                <div v-if="row[5] === 'Active'" class="active-column">
+                  <div class="green-circle"></div>
+                  <span>{{ row[5] }}</span>
+                </div>
+                <div v-else class="active-column">
+                  <div class="empty-circle"></div>
+                  <span>{{ row[5] }}</span>
+                </div>
+              </cv-data-table-cell>
+            </cv-data-table-row>
+        </template>
           <template v-if="dataTable.use_batchActions" slot="batch-actions">
             <cv-button @click="onDeleteRow">
               Delete
@@ -58,6 +78,12 @@
               <Download16 class="bx--btn__icon"/>
             </cv-button>
           </template></cv-data-table>
+        <cv-data-table-skeleton
+          v-if="this.dataTable.data.length < 1"
+          :columns="dataTable.columns"
+          :rows="skeletonRows"
+          :title="dataTable.title"
+          :helper-text="dataTable.helperText"></cv-data-table-skeleton>
       </div>
     </template>
   </div>
@@ -99,36 +125,37 @@ export default {
         ],
         data: [],
         use_batchActions: true,
-        helperText: 'Data has been requested fetched'
+        helperText: 'Data has been requested fetched',
+        skeletonRows: 1
       },
+      skeletonRows: 0,
       rowSelects: [],
       errorInfo: {
         visible: false,
-        timestamp: 'Time stamp <a href=\\"#\\">[00:00:00]</a>',
         closeAriaLabel: 'Custom close aria label'
       },
       successInfo: {
         visible: false,
-        timestamp: 'Time stamp <a href=\\"#\\">[00:00:00]</a>',
         closeAriaLabel: 'Custom close aria label'
       }
     }
   },
   mounted () {
     const that = this
-    setTimeout(function () {
-      that.isLoading = false
-      if (sampleData.length < 1) {
-        that.errorInfo.visible = true
-      } else {
-        that.successInfo.visible = true
-      }
-      that.dataTable.data = sampleData
-
-      setTimeout(function () {
-        that.errorInfo.visible = false
-        that.successInfo.visible = false
-      }, 1500)
+    setTimeout(() => {
+      this.loading.state = 'loaded'
+      setTimeout(() => {
+        that.isLoading = false
+        if (sampleData.length < 1) {
+          that.errorInfo.visible = true
+        } else {
+          that.successInfo.visible = true
+        }
+        that.dataTable.data = sampleData
+        setTimeout(() => {
+          that.successInfo.visible = false
+        }, 1000)
+      }, 800)
     }, 3000)
   },
   computed: {
@@ -158,6 +185,7 @@ export default {
         this.rowSelects = []
       }
       if (this.dataTable.data.length < 1) {
+        this.successInfo.visible = false
         this.errorInfo.visible = true
       }
     },
@@ -195,13 +223,41 @@ export default {
           }
         }
       }
+      .bx--inline-loading__checkmark-container {
+        fill: #D3FB67;
+      }
+      .bx--inline-loading__text {
+        color: #c6c6c6;
+      }
     }
     .lorem-table-page-inner{
       width: 100%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 100px;
       .cv-data-table{
         width: 80% !important;
-        margin: 150px auto;
+        margin-top: 70px;
+        .cv-data-table-row {
+          .active-column {
+            display: flex;
+            align-items: center;
+            div {
+              width: 8px;
+              height: 8px;
+              border-radius: 4px;
+              margin-right: 8px;
+            }
+            .green-circle {
+              background-color: #D3FB67;
+            }
+            .empty-circle {
+              background-color: #ccc;
+            }
+          }
+        }
       }
       .bx--batch-actions, .bx--batch-actions--active, .bx--action-list button, .bx--batch-summary__para span{
         background-color: #D3FB67;
@@ -239,8 +295,6 @@ export default {
       .bx--data-table td, .bx--data-table tbody th {
         color: rgb(244 244 244);
         background: rgb(38 38 38);
-        /*border-top: 1px solid #f4f4f4;*/
-        /*border-bottom: 1px solid #e0e0e0;*/
         border: none;
       }
       .bx--checkbox-label::before {
@@ -256,10 +310,33 @@ export default {
       }
     }
     .cv-notifiation{
+      width: 80%;
+      margin-right: unset;
       position: absolute;
-      z-index: 1000;
-      top: 63px;
-      right: 0;
+      .bx--toast-notification__details {
+        display: flex;
+        align-items: center;
+        h3, p {
+          margin: 0;
+        }
+        h3 {
+          margin-right: 10px;
+        }
+      }
+      &.bx--toast-notification--success {
+        &.success {
+          border-left: 3px solid #D3FB67;
+          .bx--toast-notification__icon {
+            fill: #D3FB67 !important;
+          }
+        }
+        &.error {
+          border-left: 3px solid #EF3E88;
+          .bx--toast-notification__icon {
+            fill: #EF3E88 !important;
+          }
+        }
+      }
     }
   }
 </style>

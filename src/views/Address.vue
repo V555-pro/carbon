@@ -26,7 +26,7 @@
           </div>
         </div>
         <a href="#" class="goAddress" v-if="isSearchValid && searchAddress !== ''">
-          <b-icon-chevron-right></b-icon-chevron-right>
+          Success Continue
         </a>
       </div>
     </div>
@@ -112,6 +112,9 @@ export default {
             &::before{
               background: transparent;
             }
+            &:hover {
+              background: transparent;
+            }
             svg:hover{
               fill: black;
             }
@@ -139,7 +142,8 @@ export default {
         }
         .goAddress{
           margin-left: 13px;
-          width: 49px;
+          text-decoration: none;
+          padding: 0 10px;
           height: 49px;
           background: rgb(211 251 103);
           display: flex;

@@ -100,8 +100,8 @@ li {
 a {
   color: #42b983;
 }
-.bx--header {
-  background-color: #171717;
+.cv-header.bx--header {
+  background-color: #3D3D3D;
   border-bottom: none;
 }
 .bx--header__action{

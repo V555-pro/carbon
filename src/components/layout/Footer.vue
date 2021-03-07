@@ -26,16 +26,11 @@ export default {
 
 <style scoped lang="scss">
   .footer{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
     z-index: 8000;
     display: flex;
     align-items: center;
     height: 5rem;
-    background-color: #161616;
-    border-bottom: 1px solid #393939;
+    background-color: #000000;
     color: white;
     padding: 40px;
     .footer-social-links{

@@ -119,25 +119,24 @@ export default {
 <style lang="scss">
   .home{
     width: 100%;
-    height: 100%;
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
+    min-height: calc(100% - 81px);
     overflow: auto;
     background: #262626;
+    display: flex;
+    align-items: center;
     .home-inner{
       width: 70%;
       height: auto;
       margin: 0 auto;
-      margin-bottom: 98px;
+      margin-bottom: 20px;
       .page-header{
         color: white;
         text-align: initial;
         max-width: 485px;
         font-size: 25px;
         word-break: break-word;
-        margin-bottom: 30px;
         margin-top: 30px;
+        margin-bottom: 60px;
       }
       .tile-wrapper{
         display: flex;
@@ -156,7 +155,7 @@ export default {
         .c_tile{
           position: relative;
           padding: 20px;
-          background: black;
+          background: #161616;
           width: 100%;
           height: 50%;
           margin-bottom: 4px;
@@ -164,13 +163,15 @@ export default {
           display: flex;
           flex-flow: column;
           cursor: pointer;
+          border: 1px transparent solid;
           &:hover{
             color: #f4f4f4;
-            background-color: #2c2c2c;
+            background-color: #1B1B1B;
           }
           &.active {
-            outline: -webkit-focus-ring-color auto 1px;
+            border: 1px white solid;
             color: white;
+            box-sizing: border-box;
             .checkmark {
               display: block;
             }
