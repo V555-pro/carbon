@@ -128,14 +128,14 @@ export default {
       width: 70%;
       height: auto;
       margin: 0 auto;
-      margin-bottom: 20px;
+      margin-bottom: 100px;
       .page-header{
         color: white;
         text-align: initial;
         max-width: 485px;
         font-size: 25px;
         word-break: break-word;
-        margin-top: 30px;
+        margin-top: 100px;
         margin-bottom: 60px;
       }
       .tile-wrapper{

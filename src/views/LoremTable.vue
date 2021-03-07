@@ -259,6 +259,9 @@ export default {
           }
         }
       }
+      .bx--data-table.bx--skeleton td span {
+        background: black !important;
+      }
       .bx--batch-actions, .bx--batch-actions--active, .bx--action-list button, .bx--batch-summary__para span{
         background-color: #D3FB67;
         color: #161616;

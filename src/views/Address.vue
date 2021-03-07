@@ -143,7 +143,7 @@ export default {
         .goAddress{
           margin-left: 13px;
           text-decoration: none;
-          padding: 0 10px;
+          padding: 0 20px;
           height: 49px;
           background: rgb(211 251 103);
           display: flex;
