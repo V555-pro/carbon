@@ -216,10 +216,24 @@ export default {
       justify-content: center;
       .bx--inline-loading {
         justify-content: center;
-        .bx--loading__svg {
-          stroke: #D3FB67;
-          .bx--loading__stroke {
-            stroke: unset;
+        .bx--inline-loading__animation {
+          width: 2.5rem;
+          height: 2.5rem;
+          .bx--loading {
+            width: 2.5rem;
+            height: 2.5rem;
+            .bx--loading__svg {
+              stroke: #D3FB67;
+              .bx--loading__background {
+                stroke: rgb(57, 57, 57);
+                stroke-dashoffset: -22;
+              }
+              .bx--loading__stroke {
+                stroke: unset;
+                stroke-dashoffset: 160;
+                stroke-width: 8;
+              }
+            }
           }
         }
       }
@@ -259,8 +273,16 @@ export default {
           }
         }
       }
-      .bx--data-table.bx--skeleton td span {
-        background: black !important;
+      .bx--data-table.bx--skeleton tbody tr:hover {
+        background: #353535;
+      }
+      .bx--data-table.bx--skeleton td {
+        span {
+          background: #353535;
+          &::before {
+            background: rgb(57, 57, 57)
+          }
+        }
       }
       .bx--batch-actions, .bx--batch-actions--active, .bx--action-list button, .bx--batch-summary__para span{
         background-color: #D3FB67;

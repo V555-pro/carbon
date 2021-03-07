@@ -136,7 +136,7 @@ export default {
         font-size: 25px;
         word-break: break-word;
         margin-top: 100px;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
       }
       .tile-wrapper{
         display: flex;

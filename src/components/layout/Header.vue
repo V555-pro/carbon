@@ -101,7 +101,7 @@ a {
   color: #42b983;
 }
 .cv-header.bx--header {
-  background-color: #3D3D3D;
+  background-color: #0C0C0C;
   border-bottom: none;
 }
 .bx--header__action{

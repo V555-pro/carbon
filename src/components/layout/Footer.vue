@@ -30,7 +30,7 @@ export default {
     display: flex;
     align-items: center;
     height: 5rem;
-    background-color: #000000;
+    background-color: #0C0C0C;
     color: white;
     padding: 40px;
     .footer-social-links{
