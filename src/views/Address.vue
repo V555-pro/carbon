@@ -82,11 +82,10 @@ export default {
 <style lang="scss">
   .address-page{
     width: 100%;
-    height: 100%;
+    min-height: calc(100% - 81px);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 70px;
     .address-page-inner{
       .cvInputWrap{
         display: flex;

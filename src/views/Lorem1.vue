@@ -42,11 +42,10 @@ export default {
 <style lang="scss">
   .lorem-page{
     width: 100%;
-    height: 100%;
+    min-height: calc(100% - 81px);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 70px;
     .lorem-page-inner{
       .gray-button, .regular-button{
         padding: 20px 17px;

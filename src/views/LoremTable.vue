@@ -1,5 +1,5 @@
 <template>
-  <div class="lorem-table-page">
+  <div class="lorem-table-page" :class="{'loading': isLoading}">
     <template v-if="isLoading">
       <div class="lorem-page-loader">
         <cv-inline-loading
@@ -206,8 +206,11 @@ export default {
 <style lang="scss">
   .lorem-table-page{
     width: 100%;
-    height: 100%;
-    margin-bottom: 70px;
+    min-height: calc(100% - 81px);
+    &.loading {
+      display: flex;
+      align-items: center;
+    }
     .lorem-page-loader{
       width: 100%;
       height: 100%;

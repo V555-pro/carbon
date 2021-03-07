@@ -2,7 +2,7 @@
   <div id="app">
     <Header />
     <router-view/>
-    <Footer v-if="currentRouteName === 'Home'" />
+    <Footer />
   </div>
 </template>
 
