@@ -1,15 +1,17 @@
 <template>
-    <div class="footer">
-      <div class="footer-description">Lorem Ipsum</div>
-      <div class="footer-social-links">
-        <a href="#">
-          <LogoTwitter20/>
-        </a>
-        <a href="#">
-          <LogoGithub20/>
-        </a>
-      </div>
+  <div class="footer">
+    <div class="footer-description">
+      Lorem Ipsum
     </div>
+    <div class="footer-social-links">
+      <a href="#">
+        <LogoTwitter20 />
+      </a>
+      <a href="#">
+        <LogoGithub20 />
+      </a>
+    </div>
+  </div>
 </template>
 
 <script>

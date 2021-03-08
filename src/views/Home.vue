@@ -7,58 +7,88 @@
       </h2>
       <div class="tile-wrapper">
         <div class="large_tile_group">
-          <div class="c_tile large_tile" :class="{'active': page === 1}" @click="goTo('Lorem1')">
+          <div
+            class="c_tile large_tile"
+            :class="{'active': page === 1}"
+            @click="goTo('Lorem1')"
+          >
             <CheckmarkFilled16 class="checkmark" />
-            <div class="tileHeader">Lorem Ipsum 1</div>
+            <div class="tileHeader">
+              Lorem Ipsum 1
+            </div>
             <div class="tileBody">
               Lorem Ipsum
             </div>
             <div class="tileFooter">
-              <img :src="addSvg" />
+              <img :src="addSvg">
             </div>
           </div>
         </div>
         <div class="middle_tile_group">
-          <div class="c_tile middle_tile" :class="{'active': page === 2}" @click="goTo('Address')">
+          <div
+            class="c_tile middle_tile"
+            :class="{'active': page === 2}"
+            @click="goTo('Address')"
+          >
             <CheckmarkFilled16 class="checkmark" />
-            <div class="tileHeader">Lorem Ipsum 2</div>
+            <div class="tileHeader">
+              Lorem Ipsum 2
+            </div>
             <div class="tileBody">
               Lorem Ipsum
             </div>
             <div class="tileFooter">
-              <img :src="checkMark" />
+              <img :src="checkMark">
             </div>
           </div>
-          <div class="c_tile middle_tile" :class="{'active': page === 3}" @click="goTo('3')">
+          <div
+            class="c_tile middle_tile"
+            :class="{'active': page === 3}"
+            @click="goTo('3')"
+          >
             <CheckmarkFilled16 class="checkmark" />
-            <div class="tileHeader">Lorem Ipsum 3</div>
+            <div class="tileHeader">
+              Lorem Ipsum 3
+            </div>
             <div class="tileBody">
               Lorem Ipsum
             </div>
             <div class="tileFooter">
-              <img :src="arrowRight" />
+              <img :src="arrowRight">
             </div>
           </div>
         </div>
         <div class="small_tile_group">
-          <div class="c_tile small_tile" :class="{'active': page === 4}" @click="goTo('4')">
+          <div
+            class="c_tile small_tile"
+            :class="{'active': page === 4}"
+            @click="goTo('4')"
+          >
             <CheckmarkFilled16 class="checkmark" />
-            <div class="tileHeader">Lorem Ipsum 4</div>
+            <div class="tileHeader">
+              Lorem Ipsum 4
+            </div>
             <div class="tileBody">
               Lorem Ipsum
             </div>
             <div class="tileFooter">
-              <img :src="launch" />
+              <img :src="launch">
             </div>
           </div>
-          <div class="c_tile small_tile" :class="{'active': page === 5}" @click="goTo('5')">
+          <div
+            class="c_tile small_tile"
+            :class="{'active': page === 5}"
+            @click="goTo('5')"
+          >
             <CheckmarkFilled16 class="checkmark" />
-            <div class="tileHeader">Lorem Ipsum 5</div>
+            <div class="tileHeader">
+              Lorem Ipsum 5
+            </div>
             <div class="tileBody">
               Lorem Ipsum
             </div>
             <div class="tileFooter">
-              <img :src="information" />
+              <img :src="information">
             </div>
           </div>
         </div>
@@ -79,6 +109,9 @@ import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16'
 
 export default {
   name: 'Home',
+  components: {
+    CheckmarkFilled16
+  },
   data () {
     return {
       addSvg: AddSvg,
@@ -88,9 +121,6 @@ export default {
       launch: Launch,
       page: 0
     }
-  },
-  components: {
-    CheckmarkFilled16
   },
   methods: {
     goTo (page) {

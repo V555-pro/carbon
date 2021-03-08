@@ -1,5 +1,8 @@
 <template>
-  <div class="lorem-table-page" :class="{'loading': isLoading}">
+  <div
+    class="lorem-table-page"
+    :class="{'loading': isLoading}"
+  >
     <template v-if="isLoading">
       <div class="lorem-page-loader">
         <cv-inline-loading
@@ -7,29 +10,36 @@
           :error-text="loading.errorText"
           :loading-text="loading.loadingText"
           :loaded-text="loading.loadedText"
-          :state="loading.state"></cv-inline-loading>
+          :state="loading.state"
+        />
       </div>
     </template>
     <template v-else>
       <div class="lorem-table-page-inner">
-        <cv-toast-notification v-if="errorInfo.visible"
+        <cv-toast-notification
+          v-if="errorInfo.visible"
           kind="success"
           class="error"
           :title="'Error Notification'"
           :sub-title="'Roius abnta mod tempor'"
-          @close="doCloseNotification"
           :close-aria-label="errorInfo.closeAriaLabel"
-          :low-contrast="false"></cv-toast-notification>
-        <cv-toast-notification v-if="successInfo.visible"
+          :low-contrast="false"
+          @close="doCloseNotification"
+        />
+        <cv-toast-notification
+          v-if="successInfo.visible"
           kind="success"
           class="success"
           :title="'Success Notification'"
           :sub-title="'Roius abnta mod tempor'"
-          @close="doCloseNotification"
           :close-aria-label="successInfo.closeAriaLabel"
-          :low-contrast="false"></cv-toast-notification>
+          :low-contrast="false"
+          @close="doCloseNotification"
+        />
         <cv-data-table
-          v-if="this.dataTable.data.length > 0"
+          v-if="dataTable.data.length > 0"
+          ref="table"
+          v-model="rowSelects"
           :row-size="dataTable.rowSize"
           :auto-width="dataTable.autoWidth"
           :sortable="dataTable.sortable"
@@ -39,51 +49,67 @@
           :zebra="dataTable.zebra"
           :columns="dataTable.columns"
           :pagination="false"
-          v-model="rowSelects"
-          @row-select-change="actionRowSelectChange"
-          @sort="onSort"
           :overflow-menu="dataTable.overflowMenu"
           :helper-text="dataTable.helperText"
-          :data="filteredData" @overflow-menu-click="onOverflowMenuClick"  ref="table">
+          :data="filteredData"
+          @row-select-change="actionRowSelectChange"
+          @sort="onSort"
+          @overflow-menu-click="onOverflowMenuClick"
+        >
           <template slot="data">
-            <cv-data-table-row v-for="(row, rowIndex) in filteredData" :key="`${rowIndex}`" :value="`${rowIndex}`">
+            <cv-data-table-row
+              v-for="(row, rowIndex) in filteredData"
+              :key="`${rowIndex}`"
+              :value="`${rowIndex}`"
+            >
               <cv-data-table-cell>{{ row[0] }}</cv-data-table-cell>
               <cv-data-table-cell>{{ row[1] }}</cv-data-table-cell>
               <cv-data-table-cell>{{ row[2] }}</cv-data-table-cell>
               <cv-data-table-cell>{{ row[3] }}</cv-data-table-cell>
               <cv-data-table-cell>{{ row[4] }}</cv-data-table-cell>
               <cv-data-table-cell>
-                <div v-if="row[5] === 'Active'" class="active-column">
-                  <div class="green-circle"></div>
+                <div
+                  v-if="row[5] === 'Active'"
+                  class="active-column"
+                >
+                  <div class="green-circle" />
                   <span>{{ row[5] }}</span>
                 </div>
-                <div v-else class="active-column">
-                  <div class="empty-circle"></div>
+                <div
+                  v-else
+                  class="active-column"
+                >
+                  <div class="empty-circle" />
                   <span>{{ row[5] }}</span>
                 </div>
               </cv-data-table-cell>
             </cv-data-table-row>
-        </template>
-          <template v-if="dataTable.use_batchActions" slot="batch-actions">
+          </template>
+          <template
+            v-if="dataTable.use_batchActions"
+            slot="batch-actions"
+          >
             <cv-button @click="onDeleteRow">
               Delete
-              <TrashCan16 class="bx--btn__icon"/>
+              <TrashCan16 class="bx--btn__icon" />
             </cv-button>
             <cv-button @click="onBatchAction2">
               Save
-              <Save16 class="bx--btn__icon"/>
+              <Save16 class="bx--btn__icon" />
             </cv-button>
             <cv-button @click="onBatchAction3">
               Download
-              <Download16 class="bx--btn__icon"/>
+              <Download16 class="bx--btn__icon" />
             </cv-button>
-          </template></cv-data-table>
+          </template>
+        </cv-data-table>
         <cv-data-table-skeleton
-          v-if="this.dataTable.data.length < 1"
+          v-if="dataTable.data.length < 1"
           :columns="dataTable.columns"
           :rows="skeletonRows"
           :title="dataTable.title"
-          :helper-text="dataTable.helperText"></cv-data-table-skeleton>
+          :helper-text="dataTable.helperText"
+        />
       </div>
     </template>
   </div>
@@ -140,6 +166,20 @@ export default {
       }
     }
   },
+  computed: {
+    filteredData () {
+      let filteredData
+      if (this.filterValue) {
+        const regex = new RegExp(this.filterValue, 'i')
+        filteredData = this.internalData.filter(item => {
+          return item.join('|').search(regex) >= 0
+        })
+      } else {
+        filteredData = this.dataTable.data
+      }
+      return filteredData
+    }
+  },
   mounted () {
     const that = this
     setTimeout(() => {
@@ -158,24 +198,10 @@ export default {
       }, 800)
     }, 3000)
   },
-  computed: {
-    filteredData () {
-      let filteredData
-      if (this.filterValue) {
-        const regex = new RegExp(this.filterValue, 'i')
-        filteredData = this.internalData.filter(item => {
-          return item.join('|').search(regex) >= 0
-        })
-      } else {
-        filteredData = this.dataTable.data
-      }
-      return filteredData
-    }
-  },
   methods: {
     onSort () {
     },
-    onDeleteRow (e) {
+    onDeleteRow () {
       if (this.rowSelects.length > 0) {
         const that = this
         var filtered = this.dataTable.data.filter((item, index) => {

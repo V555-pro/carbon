@@ -1,10 +1,17 @@
 <template>
   <cv-header aria-label="Carbon header">
-    <cv-header-menu-button aria-label="Header menu" aria-controls="side-nav" />
+    <cv-header-menu-button
+      aria-label="Header menu"
+      aria-controls="side-nav"
+    />
     <cv-skip-to-content href="#main-content">
       Skip to content
     </cv-skip-to-content>
-    <cv-header-name href="javascript:void(0)" @click.prevent="goHome()" prefix="">
+    <cv-header-name
+      href="javascript:void(0)"
+      prefix=""
+      @click.prevent="goHome()"
+    >
       Lorem Ipsum
     </cv-header-name>
     <cv-header-nav aria-label="Carbon nav">
@@ -15,8 +22,14 @@
         Lorem Ipsum
       </cv-header-menu-item>
     </cv-header-nav>
-    <template v-slot:left-panels v-if="true">
-      <cv-side-nav id="side-nav" fixed>
+    <template
+      v-if="true"
+      v-slot:left-panels
+    >
+      <cv-side-nav
+        id="side-nav"
+        fixed
+      >
         <cv-side-nav-items>
           <cv-header-side-nav-items>
             <cv-header-menu-item href="javascript:void(0)">
@@ -31,17 +44,26 @@
     </template>
     <template v-slot:header-global>
       <template v-if="currentRouteName !== 'home'">
-        <cv-header-global-action aria-label="Notification" @click="actionNotification" aria-controls="user-panel">
+        <cv-header-global-action
+          aria-label="Notification"
+          aria-controls="user-panel"
+          @click="actionNotification"
+        >
           <Notification20 />
         </cv-header-global-action>
       </template>
-      <cv-header-global-action aria-label="User avatar" @click="actionUserAvatar" aria-controls="user-panel">
+      <cv-header-global-action
+        aria-label="User avatar"
+        aria-controls="user-panel"
+        @click="actionUserAvatar"
+      >
         <UserAvatar20 />
       </cv-header-global-action>
       <cv-header-global-action
         aria-label="App switcher"
         aria-controls="switcher-panel"
-        @click="actionAppSwitcher">
+        @click="actionAppSwitcher"
+      >
         <AppSwitcher20 />
       </cv-header-global-action>
     </template>
@@ -55,9 +77,6 @@ import AppSwitcher20 from '@carbon/icons-vue/es/app-switcher/20'
 
 export default {
   name: 'Header',
-  props: {
-    msg: String
-  },
   components: {
     Notification20,
     UserAvatar20,

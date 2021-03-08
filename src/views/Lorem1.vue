@@ -1,6 +1,5 @@
 <template>
   <div class="lorem-page">
-<!--    <Header />-->
     <div class="lorem-page-inner">
       <div class="gray-button" @click="clicked = true" v-if="!clicked">
           Grayed Out Button

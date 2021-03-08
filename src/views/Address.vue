@@ -3,14 +3,15 @@
     <div class="address-page-inner">
       <div class="cvInputWrap">
         <div class="cvInputBox">
-          <div class="cvInputLabel">Enter Address</div>
+          <div class="cvInputLabel">
+            Enter Address
+          </div>
           <cv-search
-            :label="cvInputLabel"
-            @input="onInput"
             v-model="searchAddress"
-            v-bind:class="{'has_erro-cv-input': !isSearchValid && searchAddress !== ''}"
-          >
-          </cv-search>
+            :label="cvInputLabel"
+            :class="{'has_erro-cv-input': !isSearchValid && searchAddress !== ''}"
+            @input="onInput"
+          />
           <div class="cvInputSubLabel">
             <template v-if="searchAddress !== ''">
               <template v-if="isSearchValid">
@@ -25,7 +26,11 @@
             </template>
           </div>
         </div>
-        <a href="#" class="goAddress" v-if="isSearchValid && searchAddress !== ''">
+        <a
+          v-if="isSearchValid && searchAddress !== ''"
+          href="#"
+          class="goAddress"
+        >
           Success Continue
         </a>
       </div>
