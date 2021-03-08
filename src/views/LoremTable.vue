@@ -282,6 +282,8 @@ export default {
   .lorem-table-page{
     width: 100%;
     min-height: calc(100% - 81px);
+    display: flex;
+    align-items: center;
     &.loading {
       display: flex;
       align-items: center;
@@ -328,10 +330,9 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 100px;
       .cv-data-table{
         width: 80% !important;
-        margin-top: 70px;
+        // margin-top: 70px;
       }
       .bx--data-table.bx--skeleton tbody tr {
         pointer-events: none;
@@ -357,8 +358,6 @@ export default {
 
         .bx--data-table-header{
           background: rgb(38 38 38);
-          /*width: 100%;*/
-          /*flex: 1;*/
           h4{
             color: rgb(244 244 244);
           }
@@ -397,7 +396,7 @@ export default {
     .cv-notifiation{
       width: 80%;
       margin-right: unset;
-      position: absolute;
+      // position: absolute;
       .bx--toast-notification__details {
         display: flex;
         align-items: center;
