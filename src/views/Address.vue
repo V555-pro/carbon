@@ -100,7 +100,6 @@ export default {
           margin-bottom: 8px;
         }
         .bx--search {
-          border: solid 1px white;
           .bx--search-input{
             color: white;
             background: #262626;

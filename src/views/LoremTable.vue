@@ -18,7 +18,7 @@
       <div class="lorem-table-page-inner">
         <cv-toast-notification
           v-if="errorInfo.visible"
-          kind="success"
+          kind="info"
           class="error"
           :title="'Error Notification'"
           :sub-title="'Roius abnta mod tempor'"
@@ -86,6 +86,23 @@
             </cv-data-table-row>
           </template>
           <template
+            v-if="dataTable.use_actions && isLogin"
+            slot="actions"
+          >
+            <div
+              class="active-column"
+            >
+              <div class="green-circle" />
+              Logged in
+            </div>
+            <div
+              class="regular-button"
+            >
+              Regular Button
+              <b-icon-plus />
+            </div>
+          </template>
+          <template
             v-if="dataTable.use_batchActions"
             slot="batch-actions"
           >
@@ -109,7 +126,34 @@
           :rows="skeletonRows"
           :title="dataTable.title"
           :helper-text="dataTable.helperText"
-        />
+        >
+          <template
+            v-if="dataTable.use_actions"
+            slot="actions"
+          >
+            <div
+              v-if="!isLogin"
+              class="gray-button"
+            >
+              Grayed Out Button
+              <b-icon-plus />
+            </div>
+            <div
+              v-if="isLogin"
+              class="active-column"
+            >
+              <div class="green-circle" />
+              Logged in
+            </div>
+            <div
+              v-if="isLogin"
+              class="regular-button"
+            >
+              Regular Button
+              <b-icon-plus />
+            </div>
+          </template>
+        </cv-data-table-skeleton>
       </div>
     </template>
   </div>
@@ -119,6 +163,7 @@
 // @ is an alias to /src
 
 import sampleData from '../assets/sampleData'
+import { mapState } from 'vuex'
 
 export default {
   name: 'LoremTable',
@@ -150,6 +195,7 @@ export default {
           'Status'
         ],
         data: [],
+        use_actions: true,
         use_batchActions: true,
         helperText: 'Data has been requested fetched',
         skeletonRows: 1
@@ -167,6 +213,9 @@ export default {
     }
   },
   computed: {
+    ...mapState([
+      'isLogin'
+    ]),
     filteredData () {
       let filteredData
       if (this.filterValue) {
@@ -283,27 +332,9 @@ export default {
       .cv-data-table{
         width: 80% !important;
         margin-top: 70px;
-        .cv-data-table-row {
-          .active-column {
-            display: flex;
-            align-items: center;
-            div {
-              width: 8px;
-              height: 8px;
-              border-radius: 4px;
-              margin-right: 8px;
-            }
-            .green-circle {
-              background-color: #D3FB67;
-            }
-            .empty-circle {
-              background-color: #ccc;
-            }
-          }
-        }
       }
-      .bx--data-table.bx--skeleton tbody tr:hover {
-        background: #353535;
+      .bx--data-table.bx--skeleton tbody tr {
+        pointer-events: none;
       }
       .bx--data-table.bx--skeleton td {
         span {
@@ -391,6 +422,24 @@ export default {
           }
         }
       }
+    }
+  }
+  .active-column {
+    display: flex;
+    align-items: center;
+    color: #f4f4f4;
+    padding-right: 8px;
+    div {
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+    .green-circle {
+      background-color: #D3FB67;
+    }
+    .empty-circle {
+      background-color: #ccc;
     }
   }
 </style>

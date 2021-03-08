@@ -12,7 +12,10 @@
       prefix=""
       @click.prevent="goHome()"
     >
-      Lorem Ipsum
+      <img
+        src="@/assets/Logo.svg"
+        class="logo"
+      >
     </cv-header-name>
     <cv-header-nav aria-label="Carbon nav">
       <cv-header-menu-item href="javascript:void(0)">
@@ -47,7 +50,7 @@
         <cv-header-global-action
           aria-label="Notification"
           aria-controls="user-panel"
-          @click="actionNotification"
+          @click="actionUserAvatar"
         >
           <Notification20 />
         </cv-header-global-action>
@@ -55,7 +58,7 @@
       <cv-header-global-action
         aria-label="User avatar"
         aria-controls="user-panel"
-        @click="actionUserAvatar"
+        @click="login"
       >
         <UserAvatar20 />
       </cv-header-global-action>
@@ -88,13 +91,14 @@ export default {
     }
   },
   methods: {
-    actionNotification () {
+    login() {
+      this.$store.commit('login')
     },
-    actionUserAvatar () {
+    actionUserAvatar() {
     },
-    actionAppSwitcher () {
+    actionAppSwitcher() {
     },
-    goHome () {
+    goHome() {
       if (this.currentRouteName !== 'Home') {
         this.$router.push({ name: 'Home' })
       }
@@ -133,5 +137,8 @@ a {
     border-color: transparent !important;
     outline: none;
   }
+}
+.logo {
+  height: 100%;
 }
 </style>

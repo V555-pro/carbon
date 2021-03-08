@@ -45,4 +45,23 @@ export default {
     }
   }
 }
+
+.gray-button, .regular-button{
+  padding: 20px 17px;
+  background: #c6c6c6;
+  color: #949494;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  cursor: pointer;
+  svg{
+    margin-left: 31px;
+    font-size: 21px;
+  }
+}
+.regular-button {
+  background-color: #D3FB67;
+  color: #161616;
+}
 </style>
