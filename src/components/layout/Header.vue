@@ -138,6 +138,10 @@ a {
     outline: none;
   }
 }
+.cv-header-name {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
 .logo {
   height: 100%;
 }
