@@ -64,4 +64,27 @@ export default {
   background-color: #D3FB67;
   color: #161616;
 }
+.bx--inline-loading {
+	justify-content: center;
+	.bx--inline-loading__animation {
+		width: 2.5rem;
+		height: 2.5rem;
+		.bx--loading {
+			width: 2.5rem;
+			height: 2.5rem;
+			.bx--loading__svg {
+				stroke: #D3FB67;
+				.bx--loading__background {
+					stroke: rgb(57, 57, 57);
+					stroke-dashoffset: -22;
+				}
+				.bx--loading__stroke {
+					stroke: unset;
+					stroke-dashoffset: 160;
+					stroke-width: 8;
+				}
+			}
+		}
+	}
+}
 </style>

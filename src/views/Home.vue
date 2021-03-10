@@ -1,6 +1,15 @@
 <template>
   <div class="home">
-    <div class="home-inner">
+    <Notification
+      :type="type"
+      :header="header"
+      :sub-header="subHeader"
+      :visible="visible"
+    />
+    <div
+      class="
+      home-inner"
+    >
       <h2 class="page-header">
         Lorem ipsum dolor sit amet, consectetur
         adipiscing elit, sed do eiusmod tempor incididunt ut labore at dolore magna aliqua
@@ -106,11 +115,13 @@ import CheckMark from '../assets/svg/checkmark.svg'
 import Information from '../assets/svg/information.svg'
 import Launch from '../assets/svg/launch.svg'
 import CheckmarkFilled16 from '@carbon/icons-vue/es/checkmark--filled/16'
+import Notification from '@/components/shared/notification'
 
 export default {
   name: 'Home',
   components: {
-    CheckmarkFilled16
+    CheckmarkFilled16,
+    Notification,
   },
   data () {
     return {
@@ -119,7 +130,11 @@ export default {
       checkMark: CheckMark,
       information: Information,
       launch: Launch,
-      page: 0
+      page: 0,
+      type: 'loading',
+      header: 'Loading notification',
+      subHeader: 'Roius abnta mod tempor',
+      visible: false,
     }
   },
   methods: {
@@ -136,9 +151,18 @@ export default {
         }, 300)
       } else if (page === '3') {
         this.page = 3
+        this.type = 'success'
+        this.header = 'Success notification'
+        this.subHeader = 'Roius abnta mod tempor'
+        this.visible = true
       } else if (page === '4') {
         this.page = 4
+        this.type = 'loading'
+        this.header = 'Success notification'
+        this.subHeader = 'Roius abnta mod tempor'
+        this.visible = true
       } else if (page === '5') {
+        this.visible = false
         this.page = 5
       }
     }

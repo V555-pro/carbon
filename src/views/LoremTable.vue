@@ -395,29 +395,6 @@ export default {
       justify-content: center;
       z-index: 9001;
       background-color: rgba(27, 27, 27, 0.6);
-      .bx--inline-loading {
-        justify-content: center;
-        .bx--inline-loading__animation {
-          width: 2.5rem;
-          height: 2.5rem;
-          .bx--loading {
-            width: 2.5rem;
-            height: 2.5rem;
-            .bx--loading__svg {
-              stroke: #D3FB67;
-              .bx--loading__background {
-                stroke: rgb(57, 57, 57);
-                stroke-dashoffset: -22;
-              }
-              .bx--loading__stroke {
-                stroke: unset;
-                stroke-dashoffset: 160;
-                stroke-width: 8;
-              }
-            }
-          }
-        }
-      }
       .bx--inline-loading__checkmark-container {
         fill: #D3FB67;
       }
