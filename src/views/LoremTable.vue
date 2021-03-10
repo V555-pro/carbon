@@ -110,7 +110,7 @@
               Delete
               <TrashCan16 class="bx--btn__icon" />
             </cv-button>
-            <cv-button @click="onBatchAction2">
+            <cv-button @click="save()">
               Save
               <Save16 class="bx--btn__icon" />
             </cv-button>
@@ -156,6 +156,76 @@
         </cv-data-table-skeleton>
       </div>
     </template>
+    <cv-modal
+      ref="modal"
+      :close-aria-label="modal.closeAriaLabel"
+      :size="modal.size"
+      :primary-button-disabled="modal.primaryButtonDisabled"
+      :visible="modal.visible"
+      :auto-hide-off="modal.autoHideOff"
+      @primary-click="submit"
+    >
+      <template slot="title">
+        Title
+      </template>
+      <template
+        v-if="modal.use_contentWithInput"
+        slot="content"
+      >
+        <div class="bx--form-item">
+          <cv-dropdown 
+            v-model="modelProgram"
+            value=""
+            label="Select Program"
+          >
+            <cv-dropdown-item value="10">
+              <span>Option with value 10 & 10.0</span>
+            </cv-dropdown-item>
+            <cv-dropdown-item value="20">
+              Option with value 20
+            </cv-dropdown-item>
+            <cv-dropdown-item value="30">
+              Option with value 30
+            </cv-dropdown-item>
+            <cv-dropdown-item value="40">
+              Option with value 40
+            </cv-dropdown-item>
+            <cv-dropdown-item value="50">
+              Option with value 50
+            </cv-dropdown-item>
+          </cv-dropdown>
+        </div>
+        <div class="bx--form-item number">
+          <cv-number-input
+            v-model="modelNumber"
+            label="Number"
+            step="1"
+            :mobile="false"
+            @input="onNumberInput()"
+          />
+          <cv-button
+            kind="primary"
+            size=""
+            :disabled="false"
+            @click="max()"
+          >
+            Max
+          </cv-button>
+        </div>
+      </template>
+      <template
+        v-if="modal.use_secondaryButton"
+        slot="secondary-button"
+      >
+        Cancel
+      </template>
+      <template
+        v-if="modal.use_primaryButton"
+        slot="primary-button"
+      >
+        Submit
+      </template>
+    </cv-modal>
   </div>
 </template>
 
@@ -209,7 +279,19 @@ export default {
       successInfo: {
         visible: false,
         closeAriaLabel: 'Custom close aria label'
-      }
+      },
+      modal: {
+        "closeAriaLabel": "Close",
+        "size": "",
+        "use_contentWithInput": true,
+        "use_secondaryButton": true,
+        "use_primaryButton": true,
+        "primaryButtonDisabled": false,
+        "visible": false,
+        "autoHideOff": false
+      },
+      modelProgram: '',
+      modelNumber: 1,
     }
   },
   computed: {
@@ -264,7 +346,8 @@ export default {
         this.errorInfo.visible = true
       }
     },
-    onBatchAction2 () {
+    save() {
+      this.$refs.modal.show()
     },
     onBatchAction3 () {
     },
@@ -273,7 +356,22 @@ export default {
     doCloseNotification () {
       this.successInfo.visible = false
       this.errorInfo.visible = false
-    }
+    },
+    onNumberInput() {
+
+    },
+    max() {
+      this.modelNumber = 100
+    },
+    submit() {
+      this.isLoading = true
+      this.loading.loadingText = "Submiting..."
+      this.loading.state = "loading"
+      setTimeout(() => {
+        this.isLoading = false
+        this.$refs.modal.hide()
+      }, 1000)
+    },
   }
 }
 </script>
@@ -291,9 +389,12 @@ export default {
     .lorem-page-loader{
       width: 100%;
       height: 100%;
+      min-height: calc(100vh - 150px);
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 9001;
+      background-color: rgba(27, 27, 27, 0.6);
       .bx--inline-loading {
         justify-content: center;
         .bx--inline-loading__animation {
@@ -439,6 +540,99 @@ export default {
     }
     .empty-circle {
       background-color: #ccc;
+    }
+  }
+  .bx--modal-container {
+    background-color: rgb(38, 38, 38);
+    .bx--modal-header {
+      .bx--modal-header__heading {
+        color: rgb(244, 244, 244);
+      }
+      button {
+        &:hover {
+          background-color: rgb(53, 53, 53);
+        }
+        .bx--modal-close__icon {
+          fill: rgb(244, 244, 244);
+        }
+      }
+    }
+    .bx--modal-content {
+      overflow-y: unset;      
+      @media screen and (min-width: 42rem) {
+        padding-right: 1rem;
+      }
+      &:focus {
+        outline: none;
+      }
+      .bx--form-item {
+        &.number {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+          align-items: flex-end;
+        }
+        margin-top: 20px;
+        label, .bx--label {
+          color: rgb(198, 198, 198);
+        }
+        input {
+          background-color: rgb(57, 57, 57);
+          color: rgb(244, 244, 244);
+        }
+        .bx--dropdown, ul {
+          background-color: rgb(38, 38, 38);
+          color: rgb(244, 244, 244);
+        }
+        ul {
+          &:focus {
+            outline-color: white;
+          }
+          li {
+            width: 100%;
+            display: block;
+            a {
+              color: rgb(198, 198, 198);
+              border-top: 1px solid rgb(57, 57, 57);
+            }
+            &:hover {
+              background-color: rgb(53, 53, 53);
+              a {
+                color: rgb(244, 244, 244);
+                border-bottom-color: rgb(53, 53, 53);
+              }              
+            }
+            &.bx--dropdown--selected {
+              background-color: rgb(53, 53, 53);
+            }
+          }
+        }
+        .bx--dropdown {
+          button:focus {
+            outline: none;
+          }
+          button {
+            .bx--list-box__menu-icon {
+              svg {
+                fill: rgb(244, 244, 244);
+              }
+            }
+            span {
+              color: rgb(244, 244, 244);
+            }
+          }
+        }
+        .bx--dropdown--open {
+          outline-color: white;
+        }
+        .bx--number__controls {
+          button {
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+      }
     }
   }
 </style>
