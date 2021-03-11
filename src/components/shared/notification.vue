@@ -22,7 +22,10 @@
         {{ subHeader }}
       </div>
     </div>
-    <div class="close">
+    <div
+      class="close"
+      @click="close()"
+    >
       <Close20 />
     </div>
   </div>
@@ -58,24 +61,29 @@ export default {
   computed: {
   },
   methods: {
+		close() {
+			this.visible = false
+		}
   }
 }
 </script>
 <style lang="scss" scoped>
 .notification {
-	visibility: hidden;
+	display: none;
 	&.visible {
-		visibility: visible;
+		display: flex;
 	}
-	position: absolute;
-	top: 100px;
-	right: 50px;
+	// position: absolute;
+	// top: 100px;
+	// right: 50px;
+	width: 100%;
 	background-color: rgb(57, 57, 57);
-	display: flex;
 	align-items: center;
 	padding: 0.8rem 0.8rem 0.8rem 5px;
 	border-left: 3px solid #D3FB67;
 	height: 40px;
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
 	.icon {
 		.checkmark {
 			margin: 0 10px;
@@ -102,7 +110,10 @@ export default {
 	.close {
 		display: flex;
 		align-items: center;
-		margin-left: 50px;
+		margin-left: auto;
+		&:hover {
+			cursor: pointer;
+		}
 		svg {
 			fill: white;
 		}

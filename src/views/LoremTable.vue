@@ -36,6 +36,13 @@
           :low-contrast="false"
           @close="doCloseNotification"
         />
+        <Notification
+          :type="type" 
+          :header="header"
+          :sub-header="subHeader"
+          :visible="visible"
+          class="notification-container"
+        />
         <cv-data-table
           v-if="dataTable.data.length > 0"
           ref="table"
@@ -234,9 +241,13 @@
 
 import sampleData from '../assets/sampleData'
 import { mapState } from 'vuex'
+import Notification from '@/components/shared/notification'
 
 export default {
   name: 'LoremTable',
+  components: {
+    Notification
+  },
   data () {
     return {
       isLoading: true,
@@ -292,6 +303,10 @@ export default {
       },
       modelProgram: '',
       modelNumber: 1,
+      type: 'loading',
+      header: 'Loading notification',
+      subHeader: 'Roius abnta mod tempor',
+      visible: false,
     }
   },
   computed: {
@@ -312,19 +327,21 @@ export default {
     }
   },
   mounted () {
-    const that = this
     setTimeout(() => {
       this.loading.state = 'loaded'
       setTimeout(() => {
-        that.isLoading = false
+        this.isLoading = false
         if (sampleData.length < 1) {
-          that.errorInfo.visible = true
+          this.errorInfo.visible = true
         } else {
-          that.successInfo.visible = true
+          this.visible = true
         }
-        that.dataTable.data = sampleData
+        this.dataTable.data = sampleData
         setTimeout(() => {
-          that.successInfo.visible = false
+          this.type = 'success'
+          setTimeout(() => {
+            this.visible = false
+          }, 1000)
         }, 1000)
       }, 800)
     }, 3000)
@@ -408,6 +425,9 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      .notification-container {
+        width: 80%;
+      }
       .cv-data-table{
         width: 80% !important;
         // margin-top: 70px;
