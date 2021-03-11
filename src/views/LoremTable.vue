@@ -339,6 +339,7 @@ export default {
         this.dataTable.data = sampleData
         setTimeout(() => {
           this.type = 'success'
+          this.header = 'Success notification'
           setTimeout(() => {
             this.visible = false
           }, 1000)
