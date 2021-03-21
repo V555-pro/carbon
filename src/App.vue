@@ -87,4 +87,8 @@ export default {
 		}
 	}
 }
+.bx--btn--primary {
+  background-color: #D3FB67 !important;
+  color: #161616 !important;
+}
 </style>

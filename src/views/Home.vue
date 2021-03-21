@@ -166,6 +166,7 @@ export default {
       height: auto;
       margin: 0 auto;
       margin-bottom: 100px;
+      max-width: 1000px;
       .page-header{
         color: white;
         text-align: initial;

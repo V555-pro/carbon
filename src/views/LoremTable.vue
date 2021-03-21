@@ -6,11 +6,21 @@
     <template v-if="isLoading">
       <div class="lorem-page-loader">
         <cv-inline-loading
+          v-if="!progress.loading"
           :ending-text="loading.endingText"
           :error-text="loading.errorText"
           :loading-text="loading.loadingText"
           :loaded-text="loading.loadedText"
           :state="loading.state"
+        />
+        <cv-inline-loading
+          v-if="progress.loading"
+          :ending-text="loading.endingText"
+          :error-text="loading.errorText"
+          :loading-text="loading.loadingText"
+          :loaded-text="loading.loadedText"
+          :state="loading.state"
+          class="progress"
         />
       </div>
     </template>
@@ -69,15 +79,36 @@
               :key="`${rowIndex}`"
               :value="`${rowIndex}`"
             >
-              <cv-data-table-cell>{{ row[0] }}</cv-data-table-cell>
-              <cv-data-table-cell>{{ row[1] }}</cv-data-table-cell>
-              <cv-data-table-cell>{{ row[2] }}</cv-data-table-cell>
-              <cv-data-table-cell>{{ row[3] }}</cv-data-table-cell>
-              <cv-data-table-cell>{{ row[4] }}</cv-data-table-cell>
+              <cv-data-table-cell>
+                <div @click="selectRow(rowIndex)">
+                  {{ row[0] }}
+                </div>
+              </cv-data-table-cell>
+              <cv-data-table-cell>
+                <div @click="selectRow(rowIndex)">
+                  {{ row[1] }}
+                </div>
+              </cv-data-table-cell>
+              <cv-data-table-cell>
+                <div @click="selectRow(rowIndex)">
+                  {{ row[2] }}
+                </div>
+              </cv-data-table-cell>
+              <cv-data-table-cell>
+                <div @click="selectRow(rowIndex)">
+                  {{ row[3] }}
+                </div>
+              </cv-data-table-cell>
+              <cv-data-table-cell>
+                <div @click="selectRow(rowIndex)">
+                  {{ row[4] }}<div />
+                </div>
+              </cv-data-table-cell>
               <cv-data-table-cell>
                 <div
                   v-if="row[5] === 'Active'"
                   class="active-column"
+                  @click="selectRow(rowIndex)"
                 >
                   <div class="green-circle" />
                   <span>{{ row[5] }}</span>
@@ -85,6 +116,7 @@
                 <div
                   v-else
                   class="active-column"
+                  @click="selectRow(rowIndex)"
                 >
                   <div class="empty-circle" />
                   <span>{{ row[5] }}</span>
@@ -113,10 +145,10 @@
             v-if="dataTable.use_batchActions"
             slot="batch-actions"
           >
-            <cv-button @click="onDeleteRow">
+            <!-- <cv-button @click="onDeleteRow">
               Delete
               <TrashCan16 class="bx--btn__icon" />
-            </cv-button>
+            </cv-button> -->
             <cv-button @click="save()">
               Save
               <Save16 class="bx--btn__icon" />
@@ -165,7 +197,6 @@
     </template>
     <cv-modal
       ref="modal"
-      :close-aria-label="modal.closeAriaLabel"
       :size="modal.size"
       :primary-button-disabled="modal.primaryButtonDisabled"
       :visible="modal.visible"
@@ -173,9 +204,44 @@
       @primary-click="submit"
     >
       <template slot="title">
-        Title
+        <cv-progress
+          :initial-step="progress.initialStep"
+          :steps="progress.steps"
+          :vertical="progress.vertical"
+        />
       </template>
       <template
+        v-if="progress.initialStep === 0"
+        slot="content"
+      >
+        <h2>Step One</h2>
+        <p>By clicking submit, you will go to the second part</p>
+      </template>
+      <template
+        v-if="progress.initialStep === 1"
+        slot="content"
+      >
+        <h2>Choose Number</h2>
+        <p>Type in the number below that you want to submit</p>
+        <div class="bx--form-item number">
+          <cv-number-input
+            v-model="modelNumber"
+            label="Number"
+            step="1"
+            :mobile="false"
+            @input="onNumberInput()"
+          />
+          <cv-button
+            kind="primary"
+            size=""
+            :disabled="false"
+            @click="max()"
+          >
+            Max
+          </cv-button>
+        </div>
+      </template>
+      <!-- <template
         v-if="modal.use_contentWithInput"
         slot="content"
       >
@@ -219,7 +285,7 @@
             Max
           </cv-button>
         </div>
-      </template>
+      </template> -->
       <template
         v-if="modal.use_secondaryButton"
         slot="secondary-button"
@@ -307,6 +373,16 @@ export default {
       header: 'Loading notification',
       subHeader: 'Roius abnta mod tempor',
       visible: false,
+      progress: {
+        "initialStep": 0,
+        "steps": [
+          "First Step",
+          "Second Step",
+          "Third Step",
+        ],
+        "vertical": false,
+        "loading": false
+      }
     }
   },
   computed: {
@@ -350,27 +426,27 @@ export default {
   methods: {
     onSort () {
     },
-    onDeleteRow () {
-      if (this.rowSelects.length > 0) {
-        const that = this
-        var filtered = this.dataTable.data.filter((item, index) => {
-          return that.rowSelects.indexOf(index.toString()) < 0
-        })
-        this.dataTable.data = filtered
-        this.rowSelects = []
-      }
-      if (this.dataTable.data.length < 1) {
-        this.successInfo.visible = false
-        this.errorInfo.visible = true
-      }
-    },
+    // onDeleteRow () {
+    //   if (this.rowSelects.length > 0) {
+    //     const filtered = this.dataTable.data.filter((index) => {
+    //       return this.rowSelects.indexOf(index.toString()) < 0
+    //     })
+    //     this.dataTable.data = filtered
+    //     this.rowSelects = []
+    //   }
+    //   if (this.dataTable.data.length < 1) {
+    //     this.successInfo.visible = false
+    //     this.errorInfo.visible = true
+    //   }
+    // },
     save() {
       this.$refs.modal.show()
     },
     onBatchAction3 () {
     },
     onOverflowMenuClick () {},
-    actionRowSelectChange () {},
+    actionRowSelectChange () {
+    },
     doCloseNotification () {
       this.successInfo.visible = false
       this.errorInfo.visible = false
@@ -381,13 +457,23 @@ export default {
     max() {
       this.modelNumber = 100
     },
+    selectRow (v) {
+      const i = this.rowSelects.indexOf(`${v}`);
+      i > -1 ? this.rowSelects.splice(i, 1) : this.rowSelects.push(`${v}`)
+    },
     submit() {
       this.isLoading = true
       this.loading.loadingText = "Submiting..."
       this.loading.state = "loading"
+      this.progress.loading = true
       setTimeout(() => {
         this.isLoading = false
-        this.$refs.modal.hide()
+        this.progress.loading = false
+        if (this.progress.initialStep === 1) {
+          this.$refs.modal.hide()
+        } else {
+          this.progress.initialStep++
+        }
       }, 1000)
     },
   }
@@ -413,6 +499,19 @@ export default {
       justify-content: center;
       z-index: 9001;
       background-color: rgba(27, 27, 27, 0.6);
+      .bx--inline-loading {
+        &.progress {
+          flex-direction: column;
+          .bx--inline-loading__animation {
+            width: 6.5rem;
+            height: 6.5rem;
+            .bx--loading {
+              width: 6.5rem;
+              height: 6.5rem;
+            }
+          }
+        }
+      }
       .bx--inline-loading__checkmark-container {
         fill: #D3FB67;
       }
@@ -431,7 +530,24 @@ export default {
       }
       .cv-data-table{
         width: 80% !important;
-        // margin-top: 70px;
+        max-width: 1000px;
+        @media screen and (max-width: 42rem) {
+          width: 95% !important;
+        }
+        thead {
+          tr {
+            th.bx--table-column-checkbox {
+              div {
+                visibility: hidden;
+              }
+            }
+          }
+        }
+        tbody {
+          tr:hover {
+            cursor: pointer;
+          }
+        }
       }
       .bx--data-table.bx--skeleton tbody tr {
         pointer-events: none;
@@ -540,93 +656,146 @@ export default {
       background-color: #ccc;
     }
   }
-  .bx--modal-container {
-    background-color: rgb(38, 38, 38);
-    .bx--modal-header {
-      .bx--modal-header__heading {
-        color: rgb(244, 244, 244);
-      }
-      button {
-        &:hover {
-          background-color: rgb(53, 53, 53);
-        }
-        .bx--modal-close__icon {
-          fill: rgb(244, 244, 244);
-        }
-      }
+  .bx--modal {
+    &.is-visible {
+      background-color: rgba(22, 22, 22, 1);
     }
-    .bx--modal-content {
-      overflow-y: unset;      
-      @media screen and (min-width: 42rem) {
-        padding-right: 1rem;
-      }
-      &:focus {
-        outline: none;
-      }
-      .bx--form-item {
-        &.number {
-          display: flex;
-          justify-content: space-between;
-          flex-direction: row;
-          align-items: flex-end;
-        }
-        margin-top: 20px;
-        label, .bx--label {
-          color: rgb(198, 198, 198);
-        }
-        input {
-          background-color: rgb(57, 57, 57);
+    .bx--modal-container {
+      background-color: rgb(38, 38, 38);
+      .bx--modal-header {
+        margin-right: 0 !important;
+        padding-right: 1rem !important;
+        .bx--modal-header__heading {
+          padding-top: 20px;
           color: rgb(244, 244, 244);
-        }
-        .bx--dropdown, ul {
-          background-color: rgb(38, 38, 38);
-          color: rgb(244, 244, 244);
-        }
-        ul {
-          &:focus {
-            outline-color: white;
-          }
-          li {
-            width: 100%;
-            display: block;
-            a {
-              color: rgb(198, 198, 198);
-              border-top: 1px solid rgb(57, 57, 57);
-            }
-            &:hover {
-              background-color: rgb(53, 53, 53);
-              a {
+          .cv-progress {
+            .cv-progress-step {
+              flex: 1;
+              .bx--progress-line {
+                width: 100%;
+              }
+              p {
                 color: rgb(244, 244, 244);
-                border-bottom-color: rgb(53, 53, 53);
-              }              
-            }
-            &.bx--dropdown--selected {
-              background-color: rgb(53, 53, 53);
-            }
-          }
-        }
-        .bx--dropdown {
-          button:focus {
-            outline: none;
-          }
-          button {
-            .bx--list-box__menu-icon {
-              svg {
-                fill: rgb(244, 244, 244);
+              }
+              &.bx--progress-step--incomplete {
+                svg {
+                  fill: rgb(244, 244, 244);
+                }
+                .bx--progress-line {
+                  background-color: #e0e0e0;
+                }
+              }
+              &.bx--progress-step--complete {
+                .bx--progress-line {
+                  background-color: #D3FB67;
+                }
+              }
+              &.bx--progress-step--current {
+                .bx--progress-line {
+                  background-color: #D3FB67;
+                }
               }
             }
-            span {
-              color: rgb(244, 244, 244);
-            }
           }
         }
-        .bx--dropdown--open {
-          outline-color: white;
+        button {
+          display: none;
         }
-        .bx--number__controls {
-          button {
+      }
+      .bx--modal-content {
+        overflow-y: unset;      
+        @media screen and (min-width: 42rem) {
+          padding-right: 1rem;
+        }
+        color: rgb(244, 244, 244);
+        h2 {
+          font-size: 20px;
+          margin: 10px 0;
+        }
+        p {
+          font-size: 16px;
+        }
+        &:focus {
+          outline: none;
+        }
+        .bx--form-item {
+          &.number {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            align-items: flex-end;
+            .cv-number-input {
+              .bx--number {
+                width: 100%;
+              }
+            }
+            .cv-button {
+              position: absolute;
+              right: 45px;
+              background-color: transparent !important;
+              color: #D3FB67 !important;
+              min-height: 2rem;
+              padding: 10px !important;
+            }
+          }
+          margin-top: 20px;
+          label, .bx--label {
+            color: rgb(198, 198, 198);
+          }
+          input {
+            background-color: rgb(57, 57, 57);
+            color: rgb(244, 244, 244);
+          }
+          .bx--dropdown, ul {
+            background-color: rgb(38, 38, 38);
+            color: rgb(244, 244, 244);
+          }
+          ul {
             &:focus {
+              outline-color: white;
+            }
+            li {
+              width: 100%;
+              display: block;
+              a {
+                color: rgb(198, 198, 198);
+                border-top: 1px solid rgb(57, 57, 57);
+              }
+              &:hover {
+                background-color: rgb(53, 53, 53);
+                a {
+                  color: rgb(244, 244, 244);
+                  border-bottom-color: rgb(53, 53, 53);
+                }              
+              }
+              &.bx--dropdown--selected {
+                background-color: rgb(53, 53, 53);
+              }
+            }
+          }
+          .bx--dropdown {
+            button:focus {
               outline: none;
+            }
+            button {
+              .bx--list-box__menu-icon {
+                svg {
+                  fill: rgb(244, 244, 244);
+                }
+              }
+              span {
+                color: rgb(244, 244, 244);
+              }
+            }
+          }
+          .bx--dropdown--open {
+            outline-color: white;
+          }
+          .bx--number__controls {
+            button {
+              &:focus {
+                outline: none;
+              }
             }
           }
         }
