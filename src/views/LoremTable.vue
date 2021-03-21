@@ -260,7 +260,7 @@
           >
             -
           </cv-button>
-          <div class="v-line" />
+          <!-- <div class="v-line" /> -->
           <cv-button
             kind="primary"
             size=""
@@ -378,7 +378,7 @@
           >
             -
           </cv-button>
-          <div class="v-line" />
+          <!-- <div class="v-line" /> -->
           <cv-button
             kind="primary"
             size=""
@@ -906,7 +906,8 @@ export default {
             .cv-button {
               position: absolute;
               right: 55px;
-              background-color: transparent !important;
+              top: 45px;
+              background-color: #393939 !important;
               color: #D3FB67 !important;
               min-height: 2rem;
               padding: 10px !important;
@@ -916,11 +917,14 @@ export default {
                 border-width: 0 !important;
                 box-shadow: unset !important;
               }
+              &:hover {
+                background-color: #333030 !important;
+              }
               &.minus, &.plus {
                 color: white !important;
               }
               &.minus {
-                right: 30px;
+                right: 28px;
               }
               &.plus {
                 right: 0px; 
