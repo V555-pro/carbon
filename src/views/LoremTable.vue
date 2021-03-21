@@ -890,7 +890,7 @@ export default {
       }
       .bx--modal-footer {
         button {
-          border-color: unset !important;
+          border: solid 1px transparent !important;
           box-shadow: unset !important;
         }
       }
