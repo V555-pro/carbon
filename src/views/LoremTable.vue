@@ -685,6 +685,10 @@ export default {
       this.$refs.modalDownload.hide()
     },
     goToDownloadStep(i) {
+      if (i === 0) {
+        this.downloadProgress.step1 = false
+        return
+      }
       this.isLoading = true
       this.loading.loadingText = "Submiting..."
       this.loading.state = "loading"
