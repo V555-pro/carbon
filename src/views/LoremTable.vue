@@ -80,27 +80,36 @@
               :value="`${rowIndex}`"
             >
               <cv-data-table-cell>
-                <div @click="selectRow(rowIndex)">
+                <div @click="selectRow($event, rowIndex)">
+                  <cv-checkbox
+                    :checked="selects[rowIndex]"
+                    :hide-label="true"
+                    :value="`value-${rowIndex}`"
+                  />
+                </div>
+              </cv-data-table-cell>
+              <cv-data-table-cell>
+                <div @click="selectRow($event, rowIndex)">
                   {{ row[0] }}
                 </div>
               </cv-data-table-cell>
               <cv-data-table-cell>
-                <div @click="selectRow(rowIndex)">
+                <div @click="selectRow($event, rowIndex)">
                   {{ row[1] }}
                 </div>
               </cv-data-table-cell>
               <cv-data-table-cell>
-                <div @click="selectRow(rowIndex)">
+                <div @click="selectRow($event, rowIndex)">
                   {{ row[2] }}
                 </div>
               </cv-data-table-cell>
               <cv-data-table-cell>
-                <div @click="selectRow(rowIndex)">
+                <div @click="selectRow($event, rowIndex)">
                   {{ row[3] }}
                 </div>
               </cv-data-table-cell>
               <cv-data-table-cell>
-                <div @click="selectRow(rowIndex)">
+                <div @click="selectRow($event, rowIndex)">
                   {{ row[4] }}<div />
                 </div>
               </cv-data-table-cell>
@@ -108,7 +117,7 @@
                 <div
                   v-if="row[5] === 'Active'"
                   class="active-column"
-                  @click="selectRow(rowIndex)"
+                  @click="selectRow($event, rowIndex)"
                 >
                   <div class="green-circle" />
                   <span>{{ row[5] }}</span>
@@ -116,7 +125,7 @@
                 <div
                   v-else
                   class="active-column"
-                  @click="selectRow(rowIndex)"
+                  @click="selectRow($event, rowIndex)"
                 >
                   <div class="empty-circle" />
                   <span>{{ row[5] }}</span>
@@ -151,11 +160,14 @@
             </cv-button> -->
             <cv-button @click="save()">
               Save
-              <Save16 class="bx--btn__icon" />
+              <img
+                :src="matrixSvg"
+                class="bx--btn__icon"
+              >
             </cv-button>
             <cv-button @click="onBatchAction3">
               Download
-              <Download16 class="bx--btn__icon" />
+              <Upgrade32 class="bx--btn__icon" />
             </cv-button>
           </template>
         </cv-data-table>
@@ -224,7 +236,7 @@
         <h2>Choose Number</h2>
         <p>Type in the number below that you want to submit</p>
         <div class="bx--form-item number">
-          <cv-number-input
+          <cv-text-input
             v-model="modelNumber"
             label="Number"
             step="1"
@@ -238,6 +250,23 @@
             @click="max()"
           >
             Max
+          </cv-button>
+          <cv-button
+            kind="primary"
+            size=""
+            class="minus"
+            @click="minus()"
+          >
+            -
+          </cv-button>
+          <div class="v-line" />
+          <cv-button
+            kind="primary"
+            size=""
+            class="plus"
+            @click="plus()"
+          >
+            +
           </cv-button>
         </div>
       </template>
@@ -308,14 +337,18 @@
 import sampleData from '../assets/sampleData'
 import { mapState } from 'vuex'
 import Notification from '@/components/shared/notification'
+import Matrix from '../assets/svg/matrix.svg'
+import Upgrade32 from '@carbon/icons-vue/es/upgrade/32'
 
 export default {
   name: 'LoremTable',
   components: {
-    Notification
+    Notification,
+    Upgrade32
   },
   data () {
     return {
+      matrixSvg: Matrix,
       isLoading: true,
       loading: {
         endingText: 'Ending...',
@@ -377,12 +410,12 @@ export default {
         "initialStep": 0,
         "steps": [
           "First Step",
-          "Second Step",
-          "Third Step",
+          "Second Step"
         ],
         "vertical": false,
         "loading": false
-      }
+      },
+      selects: []
     }
   },
   computed: {
@@ -457,9 +490,30 @@ export default {
     max() {
       this.modelNumber = 100
     },
-    selectRow (v) {
+    plus() {
+      this.modelNumber++
+    },
+    minus() {
+      this.modelNumber--
+    },
+    selectRow (e, v) {
       const i = this.rowSelects.indexOf(`${v}`);
-      i > -1 ? this.rowSelects.splice(i, 1) : this.rowSelects.push(`${v}`)
+      if (i > -1) {
+        this.rowSelects = []
+        // this.rowSelects.splice(i, 1)
+        for (let i = 0; i < this.dataTable.data.length; i++) {
+          this.selects[i] = false
+        }
+      } else {
+        this.rowSelects = []
+        this.rowSelects.push(`${v}`)
+        for (let i = 0; i < this.dataTable.data.length; i++) {
+          this.selects[i] = false
+        }
+        this.selects[v] = true
+      }
+      e.preventDefault()
+      e.stopPropagation()
     },
     submit() {
       this.isLoading = true
@@ -596,6 +650,11 @@ export default {
         background: rgb(38 38 38);
         border: none;
       }
+      .bx--data-table {
+        td.bx--table-column-checkbox {
+          display: none;
+        }
+      }
       .bx--checkbox-label::before {
         background-color: white;
         border: none;
@@ -662,6 +721,7 @@ export default {
     }
     .bx--modal-container {
       background-color: rgb(38, 38, 38);
+      max-width: 500px;
       .bx--modal-header {
         margin-right: 0 !important;
         padding-right: 1rem !important;
@@ -671,11 +731,15 @@ export default {
           .cv-progress {
             .cv-progress-step {
               flex: 1;
+              svg {
+                fill: #D3FB67;
+              }
               .bx--progress-line {
                 width: 100%;
               }
               p {
                 color: rgb(244, 244, 244);
+                box-shadow: none;
               }
               &.bx--progress-step--incomplete {
                 svg {
@@ -719,24 +783,48 @@ export default {
           outline: none;
         }
         .bx--form-item {
+          position: relative;
           &.number {
             display: flex;
             justify-content: space-between;
             flex-direction: row;
             align-items: flex-end;
-            .cv-number-input {
-              .bx--number {
-                width: 100%;
+            .cv-text-input {
+              input:focus {
+                outline: solid 2px white !important;
               }
             }
             .cv-button {
               position: absolute;
-              right: 45px;
+              right: 55px;
               background-color: transparent !important;
               color: #D3FB67 !important;
               min-height: 2rem;
               padding: 10px !important;
+              border-width: 0 !important;
+              box-shadow: unset !important;
+              &:focus {
+                border-width: 0 !important;
+                box-shadow: unset !important;
+              }
+              &.minus, &.plus {
+                color: white !important;
+              }
+              &.minus {
+                right: 30px;
+              }
+              &.plus {
+                right: 0px; 
+              }
             }
+          }
+          .v-line {
+            width: 1px;
+            height: 15px;
+            background: #8d8d8d;
+            position: absolute;
+            right: 30px;
+            bottom: 10px;
           }
           margin-top: 20px;
           label, .bx--label {
@@ -798,6 +886,12 @@ export default {
               }
             }
           }
+        }
+      }
+      .bx--modal-footer {
+        button {
+          border-color: unset !important;
+          box-shadow: unset !important;
         }
       }
     }
