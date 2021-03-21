@@ -827,6 +827,7 @@ export default {
   .bx--modal {
     &.is-visible {
       background-color: rgba(22, 22, 22, 0.8);
+      backdrop-filter: blur(2px);
     }
     .bx--modal-container {
       background-color: rgb(38, 38, 38);
