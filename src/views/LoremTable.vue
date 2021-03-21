@@ -165,7 +165,7 @@
                 class="bx--btn__icon"
               >
             </cv-button>
-            <cv-button @click="onBatchAction3">
+            <cv-button @click="download()">
               Download
               <Upgrade32 class="bx--btn__icon" />
             </cv-button>
@@ -210,16 +210,17 @@
     <cv-modal
       ref="modal"
       :size="modal.size"
-      :primary-button-disabled="modal.primaryButtonDisabled"
-      :visible="modal.visible"
-      :auto-hide-off="modal.autoHideOff"
+      :primary-button-disabled="false"
+      :visible="false"
+      :auto-hide-off="true"
       @primary-click="submit"
+      @secondary-click="close"
     >
       <template slot="title">
         <cv-progress
           :initial-step="progress.initialStep"
           :steps="progress.steps"
-          :vertical="progress.vertical"
+          :vertical="false"
         />
       </template>
       <template
@@ -316,13 +317,84 @@
         </div>
       </template> -->
       <template
-        v-if="modal.use_secondaryButton"
         slot="secondary-button"
       >
         Cancel
       </template>
       <template
-        v-if="modal.use_primaryButton"
+        slot="primary-button"
+      >
+        Submit
+      </template>
+    </cv-modal>
+    <cv-modal
+      ref="modalDownload"
+      :size="modal.size"
+      :primary-button-disabled="false"
+      :visible="false"
+      :auto-hide-off="true"
+      @primary-click="submitDownload"
+      @secondary-click="closeDownload"
+    >
+      <template slot="title">
+        <cv-progress
+          :initial-step="downloadProgress.initialStep"
+          :steps="downloadProgress.steps"
+          :vertical="downloadProgress.vertical"
+        />
+      </template>
+      <!-- <template
+        v-if="downloadProgress.initialStep === 0"
+        slot="content"
+      >
+        <h2>Step One</h2>
+        <p>By clicking submit, you will go to the second part</p>
+      </template> -->
+      <template
+        slot="content"
+      >
+        <h2>Choose Number</h2>
+        <p>Type in the number below that you want to submit</p>
+        <div class="bx--form-item number">
+          <cv-text-input
+            v-model="modelDownloadNumber"
+            label="Number"
+            step="1"
+            :mobile="false"
+          />
+          <cv-button
+            kind="primary"
+            size=""
+            :disabled="false"
+            @click="downloadMax()"
+          >
+            Max
+          </cv-button>
+          <cv-button
+            kind="primary"
+            size=""
+            class="minus"
+            @click="downloadMinus()"
+          >
+            -
+          </cv-button>
+          <div class="v-line" />
+          <cv-button
+            kind="primary"
+            size=""
+            class="plus"
+            @click="downloadPlus()"
+          >
+            +
+          </cv-button>
+        </div>
+      </template>
+      <template
+        slot="secondary-button"
+      >
+        Cancel
+      </template>
+      <template
         slot="primary-button"
       >
         Submit
@@ -393,15 +465,13 @@ export default {
       modal: {
         "closeAriaLabel": "Close",
         "size": "",
-        "use_contentWithInput": true,
-        "use_secondaryButton": true,
-        "use_primaryButton": true,
-        "primaryButtonDisabled": false,
+      },
+      modalDownload: {
         "visible": false,
-        "autoHideOff": false
       },
       modelProgram: '',
-      modelNumber: 1,
+      modelNumber: '1',
+      modelDownloadNumber: '1',
       type: 'loading',
       header: 'Loading notification',
       subHeader: 'Roius abnta mod tempor',
@@ -412,8 +482,14 @@ export default {
           "First Step",
           "Second Step"
         ],
-        "vertical": false,
         "loading": false
+      },
+      downloadProgress: {
+        "initialStep": 0,
+        "steps": [
+          "First Step",
+          "Second Step"
+        ],
       },
       selects: []
     }
@@ -475,6 +551,9 @@ export default {
     save() {
       this.$refs.modal.show()
     },
+    download() {
+      this.$refs.modalDownload.show()
+    },
     onBatchAction3 () {
     },
     onOverflowMenuClick () {},
@@ -488,13 +567,22 @@ export default {
 
     },
     max() {
-      this.modelNumber = 100
+      this.modelNumber = '100'
+    },
+    downloadMax() {
+      this.modelDownloadNumber = '100'
     },
     plus() {
-      this.modelNumber++
+      this.modelNumber = `${++this.modelNumber}`
+    },
+    downloadPlus() {
+      this.modelDownloadNumber = `${++this.modelDownloadNumber}`
     },
     minus() {
-      this.modelNumber--
+      this.modelNumber = `${--this.modelNumber}`
+    },
+    downloadMinus() {
+      this.modelDownloadNumber = `${--this.modelDownloadNumber}`
     },
     selectRow (e, v) {
       const i = this.rowSelects.indexOf(`${v}`);
@@ -529,6 +617,27 @@ export default {
           this.progress.initialStep++
         }
       }, 1000)
+    },
+    close() {
+      this.$refs.modal.hide()
+    },
+    submitDownload() {
+      this.isLoading = true
+      this.loading.loadingText = "Submiting..."
+      this.loading.state = "loading"
+      this.progress.loading = true
+      setTimeout(() => {
+        this.isLoading = false
+        this.progress.loading = false
+        if (this.downloadProgress.initialStep === 1) {
+          this.$refs.modalDownload.hide()
+        } else {
+          this.downloadProgress.initialStep++
+        }
+      }, 1000)
+    },
+    closeDownload() {
+      this.$refs.modalDownload.hide()
     },
   }
 }
@@ -717,7 +826,7 @@ export default {
   }
   .bx--modal {
     &.is-visible {
-      background-color: rgba(22, 22, 22, 1);
+      background-color: rgba(22, 22, 22, 0.8);
     }
     .bx--modal-container {
       background-color: rgb(38, 38, 38);
