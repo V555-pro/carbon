@@ -160,14 +160,11 @@
             </cv-button> -->
             <cv-button @click="save()">
               Save
-              <img
-                :src="matrixSvg"
-                class="bx--btn__icon"
-              >
+              <RowExpand32 class="bx--btn__icon" />
             </cv-button>
             <cv-button @click="download()">
               Download
-              <Upgrade32 class="bx--btn__icon" />
+              <RowCollapse32 class="bx--btn__icon" />
             </cv-button>
           </template>
         </cv-data-table>
@@ -341,16 +338,61 @@
           :initial-step="downloadProgress.initialStep"
           :steps="downloadProgress.steps"
           :vertical="downloadProgress.vertical"
-        />
+        >
+          <cv-progress-step
+            label="First Step"
+            :complete="downloadProgress.step1"
+            @click.native="goToDownloadStep(0)"
+          />
+          <cv-progress-step
+            label="Second Step"
+            :complete="downloadProgress.step2"
+            @click.native="goToDownloadStep(1)"
+          />
+        </cv-progress>
       </template>
-      <!-- <template
+      <template
         v-if="downloadProgress.initialStep === 0"
         slot="content"
       >
-        <h2>Step One</h2>
-        <p>By clicking submit, you will go to the second part</p>
-      </template> -->
+        <h2>Choose Number</h2>
+        <p>Type in the number below that you want to submit</p>
+        <div class="bx--form-item number">
+          <cv-text-input
+            v-model="modelDownloadNumber"
+            label="Number"
+            step="1"
+            :mobile="false"
+          />
+          <cv-button
+            kind="primary"
+            size=""
+            :disabled="false"
+            @click="downloadMax()"
+          >
+            Max
+          </cv-button>
+          <cv-button
+            kind="primary"
+            size=""
+            class="minus"
+            @click="downloadMinus()"
+          >
+            -
+          </cv-button>
+          <!-- <div class="v-line" /> -->
+          <cv-button
+            kind="primary"
+            size=""
+            class="plus"
+            @click="downloadPlus()"
+          >
+            +
+          </cv-button>
+        </div>
+      </template>
       <template
+        v-if="downloadProgress.initialStep === 1"
         slot="content"
       >
         <h2>Choose Number</h2>
@@ -409,18 +451,18 @@
 import sampleData from '../assets/sampleData'
 import { mapState } from 'vuex'
 import Notification from '@/components/shared/notification'
-import Matrix from '../assets/svg/matrix.svg'
-import Upgrade32 from '@carbon/icons-vue/es/upgrade/32'
+import RowExpand32 from '@carbon/icons-vue/es/row--expand/32'
+import RowCollapse32 from '@carbon/icons-vue/es/row--collapse/32'
 
 export default {
   name: 'LoremTable',
   components: {
     Notification,
-    Upgrade32
+    RowExpand32,
+    RowCollapse32
   },
   data () {
     return {
-      matrixSvg: Matrix,
       isLoading: true,
       loading: {
         endingText: 'Ending...',
@@ -490,6 +532,8 @@ export default {
           "First Step",
           "Second Step"
         ],
+        "step1": false,
+        "step2": false
       },
       selects: []
     }
@@ -633,12 +677,26 @@ export default {
           this.$refs.modalDownload.hide()
         } else {
           this.downloadProgress.initialStep++
+          this.downloadProgress.step1 = true
         }
       }, 1000)
     },
     closeDownload() {
       this.$refs.modalDownload.hide()
     },
+    goToDownloadStep(i) {
+      this.isLoading = true
+      this.loading.loadingText = "Submiting..."
+      this.loading.state = "loading"
+      this.progress.loading = true
+      setTimeout(() => {
+        this.isLoading = false
+        this.progress.loading = false
+          this.downloadProgress.initialStep = i
+          if (i === 0)  this.downloadProgress.step1 = false
+          else  this.downloadProgress.step1 = true
+      }, 1000)
+    }
   }
 }
 </script>
