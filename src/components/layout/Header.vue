@@ -19,22 +19,8 @@
         Lorem Ipsum
       </cv-header-menu-item>
     </cv-header-nav>
-    <template v-if="true" v-slot:left-panels>
-      <cv-side-nav id="side-nav" fixed>
-        <cv-side-nav-items>
-          <cv-header-side-nav-items>
-            <cv-header-menu-item href="javascript:void(0)">
-              Lorem Ipsum Delore
-            </cv-header-menu-item>
-            <cv-header-menu-item href="javascript:void(0)">
-              Lorem Ipsum
-            </cv-header-menu-item>
-          </cv-header-side-nav-items>
-        </cv-side-nav-items>
-      </cv-side-nav>
-    </template>
     <template v-slot:header-global>
-      <template v-if="currentRouteName !== 'home'">
+      <template>
         <cv-header-global-action
           aria-label="Notification"
           aria-controls="user-panel"
@@ -90,20 +76,6 @@ export default {
 </script>
 
 <style lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 .cv-header.bx--header {
   background-color: #0c0c0c;
   border-bottom: none;
