@@ -328,7 +328,8 @@ export default {
       .bx--cc--grid rect.chart-grid-backdrop {
         fill: #262626 !important;
       }
-      .bx--cc--grid g.x.grid g.tick line, .bx--cc--grid g.y.grid g.tick line {
+      .bx--cc--grid g.x.grid g.tick line,
+      .bx--cc--grid g.y.grid g.tick line {
         stroke: #565656;
       }
     }
