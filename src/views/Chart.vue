@@ -248,7 +248,7 @@ export default {
   width: 100%;
   padding: 100px 0;
   overflow: auto;
-  background: #262626;
+  background: #161616;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -295,7 +295,7 @@ export default {
       }
       .left {
         padding: 20px;
-        background: #161616;
+        background: #262626;
         display: flex;
         flex-direction: column;
       }
@@ -306,24 +306,27 @@ export default {
         .right-top {
           padding: 20px;
           margin-bottom: 10px;
-          background: #161616;
+          background: #262626;
         }
         .right-bottom {
           padding: 20px;
-          background: #161616;
+          background: #262626;
         }
       }
     }
     .bottom {
-      background: #161616;
+      background: #262626;
       padding: 20px;
     }
     .bx--chart-holder {
-      background: #161616;
+      background: #262626;
       color: #f4f4f4;
       .bx--cc--meter-title text.meter-title,
       .bx--cc--meter-title text.percent-value {
         fill: white;
+      }
+      .bx--cc--grid rect.chart-grid-backdrop {
+        fill: #262626 !important;
       }
     }
   }
