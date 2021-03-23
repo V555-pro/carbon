@@ -9,10 +9,11 @@ module.exports = {
     "plugin:prettier/recommended",
     "eslint:recommended"
   ],
-  parserOptions: {
+  parser: "vue-eslint-parser",
+  parserOptions: {    
     parser: "babel-eslint",
-    sourceType: "module",
-    allowImportExportEverywhere: true
+    ecmaVersion: 2020,
+    sourceType: "module"
   },
   rules: {
     "prettier/prettier": [

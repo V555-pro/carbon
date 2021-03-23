@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
@@ -14,22 +13,22 @@ const routes = [
   {
     path: '/address',
     name: 'Address',
-    component: () => System.import('../views/Address')
+    component: () => import('../views/Address')
   },
   {
     path: '/lorem1',
     name: 'Lorem1',
-    component: () => System.import('../views/Lorem1')
+    component: () => import('../views/Lorem1')
   },
   {
     path: '/lorem_table',
     name: 'LoremTable',
-    component: () => System.import('../views/LoremTable')
+    component: () => import('../views/LoremTable')
   },
   {
     path: '/chart',
     name: 'Chart',
-    component: () => System.import('../views/Chart')
+    component: () => import('../views/Chart')
   }
 ]
 
