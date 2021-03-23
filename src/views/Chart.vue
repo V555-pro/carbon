@@ -10,11 +10,11 @@
             Chart Description Here
           </div>
           <div class="chart-content">
-            <ccv-meter-chart :data="meterData" :options="meter1Options" />
-            <ccv-meter-chart :data="meterData" :options="meter2Options" />
-            <ccv-meter-chart :data="meterData" :options="meter3Options" />
-            <ccv-meter-chart :data="meterData" :options="meter4Options" />
-            <ccv-meter-chart :data="meterData" :options="meter5Options" />
+            <ccv-meter-chart :data="meter1Data" :options="meter1Options" />
+            <ccv-meter-chart :data="meter2Data" :options="meter2Options" />
+            <ccv-meter-chart :data="meter3Data" :options="meter3Options" />
+            <ccv-meter-chart :data="meter4Data" :options="meter4Options" />
+            <ccv-meter-chart :data="meter5Data" :options="meter5Options" />
           </div>
         </div>
         <div class="right">
@@ -63,10 +63,34 @@ export default {
   components: {},
   data() {
     return {
-      meterData: [
+      meter1Data: [
         {
           group: 'Dataset 1',
-          value: 56
+          value: 80
+        }
+      ],
+      meter2Data: [
+        {
+          group: 'Dataset 2',
+          value: 70
+        }
+      ],
+      meter3Data: [
+        {
+          group: 'Dataset 3',
+          value: 60
+        }
+      ],
+      meter4Data: [
+        {
+          group: 'Dataset 4',
+          value: 50
+        }
+      ],
+      meter5Data: [
+        {
+          group: 'Dataset 5',
+          value: 40
         }
       ],
       meter1Options: {
@@ -84,7 +108,7 @@ export default {
         meter: {},
         color: {
           scale: {
-            'Dataset 1': '#ffffff'
+            'Dataset 2': '#ffffff'
           }
         },
         height: '80px'
@@ -94,7 +118,7 @@ export default {
         meter: {},
         color: {
           scale: {
-            'Dataset 1': '#C6C6C6'
+            'Dataset 3': '#C6C6C6'
           }
         },
         height: '80px'
@@ -104,7 +128,7 @@ export default {
         meter: {},
         color: {
           scale: {
-            'Dataset 1': '#4D4D4D'
+            'Dataset 4': '#4D4D4D'
           }
         },
         height: '80px'
@@ -114,7 +138,7 @@ export default {
         meter: {},
         color: {
           scale: {
-            'Dataset 1': '#161616'
+            'Dataset 5': '#161616'
           }
         },
         height: '80px'
