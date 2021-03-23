@@ -1,7 +1,5 @@
 import Vue from 'vue'
-import {
-  BootstrapVue, IconsPlugin
-} from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import App from './App.vue'
 import router from './router'
 

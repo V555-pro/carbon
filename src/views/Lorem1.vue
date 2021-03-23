@@ -1,19 +1,11 @@
 <template>
   <div class="lorem-page">
     <div class="lorem-page-inner">
-      <div
-        v-if="!clicked"
-        class="gray-button"
-        @click="clicked = true"
-      >
+      <div v-if="!clicked" class="gray-button" @click="clicked = true">
         Grayed Out Button
         <b-icon-plus />
       </div>
-      <div
-        v-if="clicked"
-        class="regular-button"
-        @click="actionClick()"
-      >
+      <div v-if="clicked" class="regular-button" @click="actionClick()">
         Regular Button
         <b-icon-plus />
       </div>
@@ -26,7 +18,7 @@
 
 export default {
   name: 'Lorem1',
-  data () {
+  data() {
     return {
       icon: {
         props: {
@@ -39,7 +31,7 @@ export default {
     }
   },
   methods: {
-    actionClick () {
+    actionClick() {
       this.$router.push({ name: 'LoremTable' })
     }
   }
@@ -47,11 +39,11 @@ export default {
 </script>
 
 <style lang="scss">
-  .lorem-page{
-    width: 100%;
-    min-height: calc(100% - 81px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.lorem-page {
+  width: 100%;
+  min-height: calc(100% - 81px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

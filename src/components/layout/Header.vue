@@ -1,9 +1,6 @@
 <template>
   <cv-header aria-label="Carbon header">
-    <cv-header-menu-button
-      aria-label="Header menu"
-      aria-controls="side-nav"
-    />
+    <cv-header-menu-button aria-label="Header menu" aria-controls="side-nav" />
     <cv-skip-to-content href="#main-content">
       Skip to content
     </cv-skip-to-content>
@@ -12,10 +9,7 @@
       prefix=""
       @click.prevent="goHome()"
     >
-      <img
-        src="@/assets/Logo.svg"
-        class="logo"
-      >
+      <img src="@/assets/Logo.svg" class="logo" />
     </cv-header-name>
     <cv-header-nav aria-label="Carbon nav">
       <cv-header-menu-item href="javascript:void(0)">
@@ -25,14 +19,8 @@
         Lorem Ipsum
       </cv-header-menu-item>
     </cv-header-nav>
-    <template
-      v-if="true"
-      v-slot:left-panels
-    >
-      <cv-side-nav
-        id="side-nav"
-        fixed
-      >
+    <template v-if="true" v-slot:left-panels>
+      <cv-side-nav id="side-nav" fixed>
         <cv-side-nav-items>
           <cv-header-side-nav-items>
             <cv-header-menu-item href="javascript:void(0)">
@@ -86,7 +74,7 @@ export default {
     AppSwitcher20
   },
   computed: {
-    currentRouteName () {
+    currentRouteName() {
       return this.$route.name
     }
   },
@@ -94,10 +82,8 @@ export default {
     login() {
       this.$store.commit('login')
     },
-    actionUserAvatar() {
-    },
-    actionAppSwitcher() {
-    },
+    actionUserAvatar() {},
+    actionAppSwitcher() {},
     goHome() {
       if (this.currentRouteName !== 'Home') {
         this.$router.push({ name: 'Home' })
@@ -124,15 +110,19 @@ a {
   color: #42b983;
 }
 .cv-header.bx--header {
-  background-color: #0C0C0C;
+  background-color: #0c0c0c;
   border-bottom: none;
 }
-.bx--header__action{
-  &:focus{
+.bx--header__action {
+  &:focus {
     border-color: transparent !important;
   }
 }
-.cv-header-name, .cv-header-nav, .bx--header__menu-bar, .cv-header-menu-item, a.bx--header__menu-item{
+.cv-header-name,
+.cv-header-nav,
+.bx--header__menu-bar,
+.cv-header-menu-item,
+a.bx--header__menu-item {
   &:focus {
     border-color: transparent !important;
     outline: none;

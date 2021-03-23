@@ -1,0 +1,318 @@
+<template>
+  <div class="chart">
+    <div class="chart-inner">
+      <div class="top">
+        <div class="left">
+          <div class="chart-title">
+            Meter Chart - with statuses
+          </div>
+          <div class="chart-description">
+            Chart Description Here
+          </div>
+          <div class="chart-content">
+            <ccv-meter-chart :data="meterData" :options="meterOptions" />
+            <ccv-meter-chart :data="meterData" :options="meterOptions" />
+            <ccv-meter-chart :data="meterData" :options="meterOptions" />
+            <ccv-meter-chart :data="meterData" :options="meterOptions" />
+            <ccv-meter-chart :data="meterData" :options="meterOptions" />
+          </div>
+        </div>
+        <div class="right">
+          <div class="right-top">
+            <div class="chart-title">
+              Gauge semicircular -- danger status
+            </div>
+            <div class="chart-description">
+              Chart Description Here
+            </div>
+            <ccv-gauge-chart :data="gaugeData" :options="gaugeOptions" />
+          </div>
+          <div class="right-bottom">
+            <div class="chart-title">
+              Donut
+            </div>
+            <div class="chart-description">
+              Chart Description Here
+            </div>
+            <ccv-donut-chart :data="donutData" :options="donutOptions" />
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="chart-title">
+          Stacked area (time series)
+        </div>
+        <div class="chart-description">
+          Chart Description Here
+        </div>
+        <ccv-stacked-area-chart :data="stackedData" :options="stackedOptions" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Vue from 'vue'
+import '@carbon/charts/styles.css'
+import chartsVue from '@carbon/charts-vue'
+// import "../ibm-plex-font.css";
+Vue.use(chartsVue)
+
+export default {
+  name: 'Chart',
+  components: {},
+  data() {
+    return {
+      meterData: [
+        {
+          group: 'Dataset 1',
+          value: 56
+        }
+      ],
+      meterOptions: {
+        title: '',
+        meter: {},
+        color: {
+          scale: {
+            'Dataset 1': '#D3FB67'
+          }
+        },
+        height: '80px'
+      },
+      gaugeData: [
+        {
+          group: 'value',
+          value: 42
+        },
+        {
+          group: 'delta',
+          value: -13.37
+        }
+      ],
+      gaugeOptions: {
+        title: '',
+        resizable: true,
+        height: '250px',
+        width: '100%',
+        gauge: {
+          type: 'semi',
+          status: 'danger'
+        },
+        color: {
+          scale: {
+            value: '#D3FB67'
+          }
+        }
+      },
+      donutData: [
+        {
+          group: '2V2N 9KYPM version 1',
+          value: 20000
+        },
+        {
+          group: 'L22I P66EP L22I P66EP L22I P66EP',
+          value: 65000
+        },
+        {
+          group: 'JQAI 2M4L1',
+          value: 75000
+        },
+        {
+          group: 'J9DZ F37AP',
+          value: 1200
+        },
+        {
+          group: 'YEL48 Q6XK YEL48',
+          value: 10000
+        },
+        {
+          group: 'Misc',
+          value: 25000
+        }
+      ],
+      donutOptions: {
+        title: '',
+        resizable: true,
+        legend: {
+          alignment: 'center'
+        },
+        donut: {
+          center: {
+            label: 'Browsers'
+          },
+          alignment: 'center'
+        },
+        height: '400px'
+      },
+      stackedData: [
+        {
+          group: 'Dataset 1',
+          date: '2018-12-31T22:00:00.000Z',
+          value: 10000
+        },
+        {
+          group: 'Dataset 1',
+          date: '2019-01-04T22:00:00.000Z',
+          value: 65000
+        },
+        {
+          group: 'Dataset 1',
+          date: '2019-01-07T22:00:00.000Z',
+          value: 10000
+        },
+        {
+          group: 'Dataset 1',
+          date: '2019-01-12T22:00:00.000Z',
+          value: 49213
+        },
+        {
+          group: 'Dataset 1',
+          date: '2019-01-16T22:00:00.000Z',
+          value: 51213
+        },
+        {
+          group: 'Dataset 2',
+          date: '2018-12-31T22:00:00.000Z',
+          value: 20000
+        },
+        {
+          group: 'Dataset 2',
+          date: '2019-01-04T22:00:00.000Z',
+          value: 25000
+        },
+        {
+          group: 'Dataset 2',
+          date: '2019-01-07T22:00:00.000Z',
+          value: 60000
+        },
+        {
+          group: 'Dataset 2',
+          date: '2019-01-12T22:00:00.000Z',
+          value: 30213
+        },
+        {
+          group: 'Dataset 2',
+          date: '2019-01-16T22:00:00.000Z',
+          value: 55213
+        },
+        {
+          group: 'Dataset 3',
+          date: '2018-12-31T22:00:00.000Z',
+          value: 30000
+        },
+        {
+          group: 'Dataset 3',
+          date: '2019-01-04T22:00:00.000Z',
+          value: 20000
+        },
+        {
+          group: 'Dataset 3',
+          date: '2019-01-07T22:00:00.000Z',
+          value: 40000
+        },
+        {
+          group: 'Dataset 3',
+          date: '2019-01-12T22:00:00.000Z',
+          value: 60213
+        },
+        {
+          group: 'Dataset 3',
+          date: '2019-01-16T22:00:00.000Z',
+          value: 25213
+        }
+      ],
+      stackedOptions: {
+        title: '',
+        axes: {
+          left: {
+            stacked: true,
+            scaleType: 'linear',
+            mapsTo: 'value'
+          },
+          bottom: {
+            scaleType: 'time',
+            mapsTo: 'date'
+          }
+        },
+        curve: 'curveMonotoneX',
+        height: '400px'
+      }
+    }
+  },
+  methods: {}
+}
+</script>
+
+<style lang="scss">
+.chart {
+  width: 100%;
+  padding: 100px 0;
+  overflow: auto;
+  background: #262626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .chart-inner {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    .chart-title,
+    .chart-description {
+      color: #f4f4f4;
+    }
+    .chart-title {
+      font-size: 20px;
+    }
+    .chart-description {
+      margin: 10px 0;
+    }
+    .chart-content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-around;
+    }
+    .top {
+      display: flex;
+      margin-bottom: 10px;
+      .left,
+      .right {
+        flex-grow: 1;
+      }
+      .left {
+        padding: 20px;
+        background: #161616;
+        display: flex;
+        flex-direction: column;
+      }
+      .right {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        .right-top {
+          padding: 20px;
+          margin-bottom: 10px;
+          background: #161616;
+        }
+        .right-bottom {
+          padding: 20px;
+          background: #161616;
+        }
+      }
+    }
+    .bottom {
+      background: #161616;
+      padding: 20px;
+    }
+    .bx--chart-holder {
+      background: #161616;
+      color: #f4f4f4;
+      .bx--cc--meter-title text.meter-title,
+      .bx--cc--meter-title text.percent-value {
+        fill: white;
+      }
+    }
+  }
+}
+</style>

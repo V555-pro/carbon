@@ -9,7 +9,9 @@
           <cv-search
             v-model="searchAddress"
             :label="cvInputLabel"
-            :class="{'has_erro-cv-input': !isSearchValid && searchAddress !== ''}"
+            :class="{
+              'has_erro-cv-input': !isSearchValid && searchAddress !== ''
+            }"
             @input="onInput"
           />
           <div class="cvInputSubLabel">
@@ -45,7 +47,7 @@ import lists from '../assets/list'
 
 export default {
   name: 'Address',
-  data () {
+  data() {
     return {
       cvInputLabel: 'Enter Address',
       searchAddress: '',
@@ -69,7 +71,7 @@ export default {
     }
   },
   methods: {
-    onInput () {
+    onInput() {
       if (this.searchAddress !== '') {
         if (lists.indexOf(this.searchAddress) > -1) {
           this.isSearchValid = true
@@ -85,76 +87,76 @@ export default {
 </script>
 
 <style lang="scss">
-  .address-page{
-    width: 100%;
-    min-height: calc(100% - 81px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .address-page-inner{
-      .cvInputWrap{
-        display: flex;
-        align-items: center;
-        .cvInputLabel{
-          color: #bababa;
-          margin-bottom: 8px;
-        }
-        .bx--search {
-          .bx--search-input{
-            color: white;
-            background: #262626;
-            &:focus{
-              outline: 2px solid transparent;
-            }
-          }
-          svg{
-            fill: rgb(114 114 114);
-          }
-          .bx--search-close{
-            border: none;
-            &::before{
-              background: transparent;
-            }
-            &:hover {
-              background: transparent;
-            }
-            svg:hover{
-              fill: black;
-            }
-          }
-          .bx--search-input:focus ~ .bx--search-close:hover {
+.address-page {
+  width: 100%;
+  min-height: calc(100% - 81px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .address-page-inner {
+    .cvInputWrap {
+      display: flex;
+      align-items: center;
+      .cvInputLabel {
+        color: #bababa;
+        margin-bottom: 8px;
+      }
+      .bx--search {
+        .bx--search-input {
+          color: white;
+          background: #262626;
+          &:focus {
             outline: 2px solid transparent;
-            outline-offset: -2px;
           }
         }
-        .has_erro-cv-input{
-          .bx--search{
-            border: solid 1px rgb(232 90 92);
-            input{
-              outline: none;
-              border: none;
-            }
+        svg {
+          fill: rgb(114 114 114);
+        }
+        .bx--search-close {
+          border: none;
+          &::before {
+            background: transparent;
+          }
+          &:hover {
+            background: transparent;
+          }
+          svg:hover {
+            fill: black;
           }
         }
-        .cvInputSubLabel{
-          color: #bababa;
-          margin-top: 8px;
+        .bx--search-input:focus ~ .bx--search-close:hover {
+          outline: 2px solid transparent;
+          outline-offset: -2px;
         }
-        .has_erro-cv-input + .cvInputSubLabel{
-          color: rgb(232 90 92);
+      }
+      .has_erro-cv-input {
+        .bx--search {
+          border: solid 1px rgb(232 90 92);
+          input {
+            outline: none;
+            border: none;
+          }
         }
-        .goAddress{
-          margin-left: 13px;
-          text-decoration: none;
-          padding: 0 20px;
-          height: 49px;
-          background: rgb(211 251 103);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: black;
-        }
+      }
+      .cvInputSubLabel {
+        color: #bababa;
+        margin-top: 8px;
+      }
+      .has_erro-cv-input + .cvInputSubLabel {
+        color: rgb(232 90 92);
+      }
+      .goAddress {
+        margin-left: 13px;
+        text-decoration: none;
+        padding: 0 20px;
+        height: 49px;
+        background: rgb(211 251 103);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
       }
     }
   }
+}
 </style>

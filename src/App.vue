@@ -14,7 +14,7 @@ export default {
   name: 'App',
   components: { Header, Footer },
   computed: {
-    currentRouteName () {
+    currentRouteName() {
       return this.$route.name
     }
   }
@@ -46,7 +46,8 @@ export default {
   }
 }
 
-.gray-button, .regular-button{
+.gray-button,
+.regular-button {
   padding: 20px 17px;
   background: #c6c6c6;
   color: #949494;
@@ -55,40 +56,40 @@ export default {
   align-items: center;
   font-size: 17px;
   cursor: pointer;
-  svg{
+  svg {
     margin-left: 31px;
     font-size: 21px;
   }
 }
 .regular-button {
-  background-color: #D3FB67;
+  background-color: #d3fb67;
   color: #161616;
 }
 .bx--inline-loading {
-	justify-content: center;
-	.bx--inline-loading__animation {
-		width: 2.5rem;
-		height: 2.5rem;
-		.bx--loading {
-			width: 2.5rem;
-			height: 2.5rem;
-			.bx--loading__svg {
-				stroke: #D3FB67;
-				.bx--loading__background {
-					stroke: rgb(57, 57, 57);
-					stroke-dashoffset: -22;
-				}
-				.bx--loading__stroke {
-					stroke: unset;
-					stroke-dashoffset: 160;
-					stroke-width: 8;
-				}
-			}
-		}
-	}
+  justify-content: center;
+  .bx--inline-loading__animation {
+    width: 2.5rem;
+    height: 2.5rem;
+    .bx--loading {
+      width: 2.5rem;
+      height: 2.5rem;
+      .bx--loading__svg {
+        stroke: #d3fb67;
+        .bx--loading__background {
+          stroke: rgb(57, 57, 57);
+          stroke-dashoffset: -22;
+        }
+        .bx--loading__stroke {
+          stroke: unset;
+          stroke-dashoffset: 160;
+          stroke-width: 8;
+        }
+      }
+    }
+  }
 }
 .bx--btn--primary {
-  background-color: #D3FB67 !important;
+  background-color: #d3fb67 !important;
   color: #161616 !important;
 }
 </style>

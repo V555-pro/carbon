@@ -25,6 +25,11 @@ const routes = [
     path: '/lorem_table',
     name: 'LoremTable',
     component: () => System.import('../views/LoremTable')
+  },
+  {
+    path: '/chart',
+    name: 'Chart',
+    component: () => System.import('../views/Chart')
   }
 ]
 

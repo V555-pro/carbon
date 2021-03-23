@@ -32,20 +32,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .footer{
-    z-index: 8000;
-    display: flex;
-    align-items: center;
-    height: 5rem;
-    background-color: #0C0C0C;
-    color: white;
-    padding: 40px;
-    .footer-social-links{
-      margin-left: auto;
-      a{
-        color: white;
-        margin-left: 8px;
-      }
+.footer {
+  z-index: 8000;
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  background-color: #0c0c0c;
+  color: white;
+  padding: 40px;
+  .footer-social-links {
+    margin-left: auto;
+    a {
+      color: white;
+      margin-left: 8px;
     }
   }
+}
 </style>
