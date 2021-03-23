@@ -146,24 +146,24 @@ export default {
       },
       donutData: [
         {
-          group: '2V2N 9KYPM version 1',
-          value: 20000
-        },
-        {
-          group: 'L22I P66EP L22I P66EP L22I P66EP',
-          value: 65000
-        },
-        {
-          group: 'JQAI 2M4L1',
-          value: 75000
-        },
-        {
-          group: 'YEL48 Q6XK YEL48',
+          group: 'Dataset 1',
           value: 10000
         },
         {
-          group: 'Misc',
+          group: 'Dataset 2',
+          value: 20000
+        },
+        {
+          group: 'Dataset 3',
           value: 25000
+        },
+        {
+          group: 'Dataset 4',
+          value: 65000
+        },
+        {
+          group: 'Dataset 5',
+          value: 75000
         }
       ],
       donutOptions: {
@@ -181,11 +181,11 @@ export default {
         height: '400px',
         color: {
           scale: {
-            '2V2N 9KYPM version 1': '#C6C6C6',
-            'L22I P66EP L22I P66EP L22I P66EP': '#161616',
-            'JQAI 2M4L1': '#D3FB67',
-            'YEL48 Q6XK YEL48': '#ffffff',
-            Misc: '#4D4D4D'
+            'Dataset 1': '#ffffff',
+            'Dataset 2': '#C6C6C6',
+            'Dataset 3': '#4D4D4D',
+            'Dataset 4': '#161616',
+            'Dataset 5': '#D3FB67'
           }
         }
       },
