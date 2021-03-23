@@ -10,11 +10,11 @@
             Chart Description Here
           </div>
           <div class="chart-content">
-            <ccv-meter-chart :data="meterData" :options="meterOptions" />
-            <ccv-meter-chart :data="meterData" :options="meterOptions" />
-            <ccv-meter-chart :data="meterData" :options="meterOptions" />
-            <ccv-meter-chart :data="meterData" :options="meterOptions" />
-            <ccv-meter-chart :data="meterData" :options="meterOptions" />
+            <ccv-meter-chart :data="meterData" :options="meter1Options" />
+            <ccv-meter-chart :data="meterData" :options="meter2Options" />
+            <ccv-meter-chart :data="meterData" :options="meter3Options" />
+            <ccv-meter-chart :data="meterData" :options="meter4Options" />
+            <ccv-meter-chart :data="meterData" :options="meter5Options" />
           </div>
         </div>
         <div class="right">
@@ -69,12 +69,52 @@ export default {
           value: 56
         }
       ],
-      meterOptions: {
+      meter1Options: {
         title: '',
         meter: {},
         color: {
           scale: {
             'Dataset 1': '#D3FB67'
+          }
+        },
+        height: '80px'
+      },
+      meter2Options: {
+        title: '',
+        meter: {},
+        color: {
+          scale: {
+            'Dataset 1': '#ffffff'
+          }
+        },
+        height: '80px'
+      },
+      meter3Options: {
+        title: '',
+        meter: {},
+        color: {
+          scale: {
+            'Dataset 1': '#C6C6C6'
+          }
+        },
+        height: '80px'
+      },
+      meter4Options: {
+        title: '',
+        meter: {},
+        color: {
+          scale: {
+            'Dataset 1': '#4D4D4D'
+          }
+        },
+        height: '80px'
+      },
+      meter5Options: {
+        title: '',
+        meter: {},
+        color: {
+          scale: {
+            'Dataset 1': '#161616'
           }
         },
         height: '80px'
@@ -118,10 +158,6 @@ export default {
           value: 75000
         },
         {
-          group: 'J9DZ F37AP',
-          value: 1200
-        },
-        {
           group: 'YEL48 Q6XK YEL48',
           value: 10000
         },
@@ -142,7 +178,16 @@ export default {
           },
           alignment: 'center'
         },
-        height: '400px'
+        height: '400px',
+        color: {
+          scale: {
+            '2V2N 9KYPM version 1': '#C6C6C6',
+            'L22I P66EP L22I P66EP L22I P66EP': '#161616',
+            'JQAI 2M4L1': '#D3FB67',
+            'YEL48 Q6XK YEL48': '#ffffff',
+            Misc: '#4D4D4D'
+          }
+        }
       },
       stackedData: [
         {
@@ -219,6 +264,56 @@ export default {
           group: 'Dataset 3',
           date: '2019-01-16T22:00:00.000Z',
           value: 25213
+        },
+        {
+          group: 'Dataset 4',
+          date: '2018-12-31T22:00:00.000Z',
+          value: 33000
+        },
+        {
+          group: 'Dataset 4',
+          date: '2019-01-04T22:00:00.000Z',
+          value: 25000
+        },
+        {
+          group: 'Dataset 4',
+          date: '2019-01-07T22:00:00.000Z',
+          value: 45000
+        },
+        {
+          group: 'Dataset 4',
+          date: '2019-01-12T22:00:00.000Z',
+          value: 65213
+        },
+        {
+          group: 'Dataset 4',
+          date: '2019-01-16T22:00:00.000Z',
+          value: 30213
+        },
+        {
+          group: 'Dataset 5',
+          date: '2018-12-31T22:00:00.000Z',
+          value: 38000
+        },
+        {
+          group: 'Dataset 5',
+          date: '2019-01-04T22:00:00.000Z',
+          value: 30000
+        },
+        {
+          group: 'Dataset 5',
+          date: '2019-01-07T22:00:00.000Z',
+          value: 50000
+        },
+        {
+          group: 'Dataset 5',
+          date: '2019-01-12T22:00:00.000Z',
+          value: 70213
+        },
+        {
+          group: 'Dataset 5',
+          date: '2019-01-16T22:00:00.000Z',
+          value: 35213
         }
       ],
       stackedOptions: {
@@ -235,7 +330,16 @@ export default {
           }
         },
         curve: 'curveMonotoneX',
-        height: '400px'
+        height: '400px',
+        color: {
+          scale: {
+            'Dataset 1': '#161616',
+            'Dataset 2': '#4D4D4D',
+            'Dataset 3': '#C6C6C6',
+            'Dataset 4': '#ffffff',
+            'Dataset 5': '#D3FB67'
+          }
+        }
       }
     }
   },
@@ -321,6 +425,12 @@ export default {
     .bx--chart-holder {
       background: #262626;
       color: #f4f4f4;
+      .bx--cc--meter rect.container {
+        fill: #393939;
+      }
+      .bx--cc--gauge path.arc-background {
+        fill: #393939;
+      }
       .bx--cc--meter-title text.meter-title,
       .bx--cc--meter-title text.percent-value {
         fill: white;
