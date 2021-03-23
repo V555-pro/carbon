@@ -41,9 +41,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
-import lists from '../assets/list'
+import lists from '@/assets/list'
 
 export default {
   name: 'Address',
@@ -51,23 +49,7 @@ export default {
     return {
       cvInputLabel: 'Enter Address',
       searchAddress: '',
-      isSearchValid: false,
-      iconAlways: {
-        props: {
-          title: {}
-        },
-        functional: true,
-        _Ctor: {}
-      },
-      light: false,
-      label: 'Text input label',
-      disabled: false,
-      passwordVisible: false,
-      passwordHideLabel: 'Hide password',
-      passwordShowLabel: 'Show password',
-      placeholder: 'Sample placeholder',
-      use_helperTextSlot: true,
-      use_invalidMessageSlot: true
+      isSearchValid: false
     }
   },
   methods: {

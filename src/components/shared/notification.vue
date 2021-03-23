@@ -63,9 +63,6 @@ export default {
   &.visible {
     display: flex;
   }
-  // position: absolute;
-  // top: 100px;
-  // right: 50px;
   width: 100%;
   max-width: 1000px;
   background-color: rgb(57, 57, 57);

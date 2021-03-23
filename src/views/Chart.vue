@@ -257,6 +257,19 @@ export default {
     display: flex;
     flex-direction: column;
     color: white;
+    max-width: 1000px;
+    @media only screen and (max-width: 576px) {
+      width: 95%;
+      .top {
+        flex-direction: column;
+        .left {
+          margin-bottom: 10px;
+        }
+        .right {
+          margin-left: 0 !important;
+        }
+      }
+    }
     .chart-title,
     .chart-description {
       color: #f4f4f4;

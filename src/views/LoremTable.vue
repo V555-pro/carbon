@@ -387,9 +387,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
-import sampleData from '../assets/sampleData'
+import sampleData from '@/assets/sampleData'
 import { mapState } from 'vuex'
 import Notification from '@/components/shared/notification'
 import RowExpand32 from '@carbon/icons-vue/es/row--expand/32'

@@ -14,19 +14,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 export default {
   name: 'Lorem1',
   data() {
     return {
-      icon: {
-        props: {
-          title: {}
-        },
-        functional: true,
-        _Ctor: {}
-      },
       clicked: false
     }
   },

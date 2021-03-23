@@ -38,7 +38,6 @@
         <cv-header-global-action
           aria-label="Notification"
           aria-controls="user-panel"
-          @click="actionUserAvatar"
         >
           <Notification20 />
         </cv-header-global-action>
@@ -53,7 +52,6 @@
       <cv-header-global-action
         aria-label="App switcher"
         aria-controls="switcher-panel"
-        @click="actionAppSwitcher"
       >
         <AppSwitcher20 />
       </cv-header-global-action>
@@ -82,8 +80,6 @@ export default {
     login() {
       this.$store.commit('login')
     },
-    actionUserAvatar() {},
-    actionAppSwitcher() {},
     goHome() {
       if (this.currentRouteName !== 'Home') {
         this.$router.push({ name: 'Home' })
@@ -93,7 +89,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 h3 {
   margin: 40px 0 0;
